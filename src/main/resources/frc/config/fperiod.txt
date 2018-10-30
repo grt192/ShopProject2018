@@ -1,0 +1,3 @@
+# Config file for F period shop project robot
+
+period=F
