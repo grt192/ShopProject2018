@@ -9,12 +9,6 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import frc.config.Config;
-import frc.fperiod.FAutonomous;
-import frc.fperiod.FMechCollection;
-import frc.fperiod.FTeleop;
-import frc.gperiod.GAutonomous;
-import frc.gperiod.GMechCollection;
-import frc.gperiod.GTeleop;
 
 public class Robot extends IterativeRobot {
 
@@ -24,15 +18,8 @@ public class Robot extends IterativeRobot {
     @Override
     public void robotInit() {
         Config.start();
-        if (Config.getString("period").equals("F")) {
-            FMechCollection mechs = new FMechCollection();
-            auto = new FAutonomous();
-            teleop = new FTeleop();
-        } else {
-            GMechCollection mechs = new GMechCollection();
-            auto = new GAutonomous();
-            teleop = new GTeleop();
-        }
+        auto = new Autonomous();
+        teleop = new Teleop();
     }
 
     @Override
