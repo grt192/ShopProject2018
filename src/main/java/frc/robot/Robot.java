@@ -9,17 +9,26 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import frc.config.Config;
+import frc.mechs.Elevator;
+import frc.mechs.Pickup;
 
 public class Robot extends IterativeRobot {
 
     private Autonomous auto;
     private Teleop teleop;
 
+    private Pickup pickup;
+    private Elevator elevator;
+
     @Override
     public void robotInit() {
         Config.start();
+
+        pickup = new Pickup();
+        elevator = new Elevator();
+
         auto = new Autonomous();
-        teleop = new Teleop();
+        teleop = new Teleop(pickup, elevator);
     }
 
     @Override

@@ -1,1 +1,16 @@
 # Config file for shop project robots
+
+left-drive-encoder=
+left-drive-assist=
+
+right-drive-encoder=
+right-drive-assist=
+
+pickup-pneumatic=
+
+pickup-pivot=
+
+winch-left=
+winch-right=
+
+table-pivot=
