@@ -1,28 +1,48 @@
 package frc.drivetrain;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.kauailabs.navx.frc.AHRS;
 
+import edu.wpi.first.wpilibj.SPI.Port;
 import frc.config.Config;
 
 public class Tank {
 
-    private static final double TICKS_TO_METERS = 0;
-    private static final double WIDTH = 0.73025;
-
-    private static final double MAX_SPEED = 3.00;
+    private final double TICKS_TO_METERS;
+    private final double WIDTH;
+    private final double MAX_SPEED;
 
     private TalonSRX leftMotor;
     private TalonSRX rightMotor;
+    private AHRS gyro;
 
     public Tank() {
+        TICKS_TO_METERS = Config.getDouble("ticks_to_meters");
+        WIDTH = Config.getDouble("dt_width");
+        MAX_SPEED = Config.getInt("max_speed");
+
+        gyro = new AHRS(Port.kMXP);
+
         leftMotor = new TalonSRX(Config.getInt("left_master"));
+        Config.defaultConfigTalon(leftMotor);
         TalonSRX leftFollower = new TalonSRX(Config.getInt("left_follower"));
+        Config.defaultConfigTalon(leftFollower);
         leftFollower.follow(leftMotor);
+        configPID(leftMotor);
 
         rightMotor = new TalonSRX(Config.getInt("right_master"));
+        Config.defaultConfigTalon(rightMotor);
         TalonSRX rightFollower = new TalonSRX(Config.getInt("right_follower"));
+        Config.defaultConfigTalon(rightFollower);
         rightFollower.follow(rightMotor);
+        configPID(rightMotor);
+    }
+
+    public void setRaw(double lSpeed, double rSpeed) {
+        leftMotor.set(ControlMode.PercentOutput, lSpeed);
+        rightMotor.set(ControlMode.PercentOutput, rSpeed);
     }
 
     public void set(double lSpeed, double rSpeed) {
@@ -37,6 +57,28 @@ public class Tank {
         double lSpeed = speed + angVel * WIDTH / 2;
         double rSpeed = speed - angVel * WIDTH / 2;
         set(lSpeed, rSpeed);
+    }
+
+    private void configPID(TalonSRX talon) {
+        talon.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
+        double kF = 1023 * 10 * TICKS_TO_METERS / MAX_SPEED;
+        talon.config_kP(0, kF * 5, 0);
+        talon.config_kI(0, 0, 0);
+        talon.config_kD(0, 0, 0);
+        talon.config_kF(0, kF, 0);
+    }
+
+    public TankData getTankData() {
+        TankData td = new TankData();
+        double leftSpeed = leftMotor.getSelectedSensorVelocity(0) * TICKS_TO_METERS;
+        double rightSpeed = rightMotor.getSelectedSensorVelocity(0) * TICKS_TO_METERS;
+        td.leftSpeed = leftSpeed;
+        td.rightSpeed = rightSpeed;
+        td.avgSpeed = (leftSpeed + rightSpeed) / 2;
+        td.encoderW = (leftSpeed - rightSpeed) / WIDTH;
+        td.gyroAngle = Math.toRadians(gyro.getAngle());
+        td.gyroW = Math.toRadians(gyro.getRate());
+        return td;
     }
 
 }

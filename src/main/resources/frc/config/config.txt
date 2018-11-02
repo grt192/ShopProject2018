@@ -1,1 +1,9 @@
 # Config file for shop project robots
+
+dt_width=0.73025
+
+left_master=0
+left_follower=0
+right_master=0
+right_follower=0
+

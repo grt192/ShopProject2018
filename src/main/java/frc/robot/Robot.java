@@ -9,17 +9,21 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import frc.config.Config;
+import frc.drivetrain.Tank;
 
 public class Robot extends IterativeRobot {
 
     private Autonomous auto;
     private Teleop teleop;
 
+    private Tank tank;
+
     @Override
     public void robotInit() {
         Config.start();
+        tank = new Tank();
         auto = new Autonomous();
-        teleop = new Teleop();
+        teleop = new Teleop(tank);
     }
 
     @Override
