@@ -23,9 +23,9 @@ public class Teleop {
 
 	public void periodic() {
 		if (xbox.getAButton()) {
-			tank.setRaw(0.75, 0.75);
+			tank.setRaw(0.5, 0.5);
 		} else if (xbox.getBButton()) {
-			tank.setRaw(-0.75, -0.75);
+			tank.setRaw(-0.5, -0.5);
 		} else {
 			tank.setRaw(-xbox.getY(Hand.kLeft), -xbox.getY(Hand.kRight));
 		}

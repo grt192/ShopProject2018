@@ -34,8 +34,10 @@ public class Tank {
 
         rightMotor = new TalonSRX(Config.getInt("right_master"));
         Config.defaultConfigTalon(rightMotor);
+        rightMotor.setInverted(true);
         TalonSRX rightFollower = new TalonSRX(Config.getInt("right_follower"));
         Config.defaultConfigTalon(rightFollower);
+        rightFollower.setInverted(true);
         rightFollower.follow(rightMotor);
         configPID(rightMotor);
     }
@@ -70,8 +72,8 @@ public class Tank {
 
     public TankData getTankData() {
         TankData td = new TankData();
-        double leftSpeed = leftMotor.getSelectedSensorVelocity(0) * TICKS_TO_METERS;
-        double rightSpeed = rightMotor.getSelectedSensorVelocity(0) * TICKS_TO_METERS;
+        double leftSpeed = leftMotor.getSelectedSensorVelocity(0) * TICKS_TO_METERS * 10;
+        double rightSpeed = rightMotor.getSelectedSensorVelocity(0) * TICKS_TO_METERS * 10;
         td.leftSpeed = leftSpeed;
         td.rightSpeed = rightSpeed;
         td.avgSpeed = (leftSpeed + rightSpeed) / 2;

@@ -3,8 +3,10 @@
 dt_width=0.73025
 ticks_to_meters=0.0005588
 
-left_master=0
-left_follower=0
-right_master=0
-right_follower=0
+max_speed=3.5
+
+left_master=15
+left_follower=16
+right_master=2
+right_follower=1
 
