@@ -26,18 +26,22 @@ public class Tank {
         gyro = new AHRS(Port.kMXP);
 
         leftMotor = new TalonSRX(Config.getInt("left_master"));
+        boolean leftInverted = Config.getBoolean("left_inverted");
         Config.defaultConfigTalon(leftMotor);
+        leftMotor.setInverted(leftInverted);
         TalonSRX leftFollower = new TalonSRX(Config.getInt("left_follower"));
         Config.defaultConfigTalon(leftFollower);
+        leftFollower.setInverted(leftInverted);
         leftFollower.follow(leftMotor);
         configPID(leftMotor);
 
         rightMotor = new TalonSRX(Config.getInt("right_master"));
+        boolean rightInverted = Config.getBoolean("right_inverted");
         Config.defaultConfigTalon(rightMotor);
-        rightMotor.setInverted(true);
+        rightMotor.setInverted(rightInverted);
         TalonSRX rightFollower = new TalonSRX(Config.getInt("right_follower"));
         Config.defaultConfigTalon(rightFollower);
-        rightFollower.setInverted(true);
+        rightFollower.setInverted(rightInverted);
         rightFollower.follow(rightMotor);
         configPID(rightMotor);
     }
