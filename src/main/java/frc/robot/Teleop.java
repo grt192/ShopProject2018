@@ -22,15 +22,13 @@ public class Teleop {
 	}
 
 	public void periodic() {
-		if (xbox.getAButton()) {
-			tank.setRaw(0.5, 0.5);
-		} else if (xbox.getBButton()) {
-			tank.setRaw(-0.5, -0.5);
-		} else {
-			tank.setRaw(-xbox.getY(Hand.kLeft), -xbox.getY(Hand.kRight));
-		}
+		double lSpeed = -xbox.getY(Hand.kLeft) * tank.MAX_SPEED;
+		double rSpeed = -xbox.getY(Hand.kLeft) * tank.MAX_SPEED;
+		tank.set(lSpeed, rSpeed);
 		TankData td = tank.getTankData();
-		System.out.println(td.leftSpeed + ", " + td.rightSpeed + ", " + td.avgSpeed);
+		System.out.println("Intended: " + lSpeed + ", " + rSpeed);
+		System.out.println("Actual: " + td.leftSpeed + ", " + td.rightSpeed);
+		tank.printError();
 	}
 
 }
