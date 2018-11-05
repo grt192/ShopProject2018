@@ -72,6 +72,11 @@ public class Tank {
         talon.config_kI(0, 0, 0);
         talon.config_kD(0, 0, 0);
         talon.config_kF(0, kF, 0);
+
+        talon.config_kP(1, 0, 0);
+        talon.config_kI(1, 0, 0);
+        talon.config_kD(1, 0, 0);
+        talon.config_kF(1, 0, 0);
     }
 
     public TankData getTankData() {
