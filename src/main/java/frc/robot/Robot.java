@@ -10,6 +10,8 @@ package frc.robot;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import frc.config.Config;
 import frc.drivetrain.Tank;
+import frc.fieldmapping.EncoderPositionTracker;
+import frc.fieldmapping.FieldMappingThread;
 
 public class Robot extends IterativeRobot {
 
@@ -17,11 +19,16 @@ public class Robot extends IterativeRobot {
     private Teleop teleop;
 
     private Tank tank;
+    private FieldMappingThread fieldMappingThread;
+    private EncoderPositionTracker tracker;
 
     @Override
     public void robotInit() {
         Config.start();
         tank = new Tank();
+        fieldMappingThread = new FieldMappingThread(tank);
+        fieldMappingThread.start();
+        tracker = fieldMappingThread.getTracker();
         auto = new Autonomous();
         teleop = new Teleop(tank);
     }
