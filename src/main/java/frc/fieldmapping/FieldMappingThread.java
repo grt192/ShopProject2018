@@ -4,7 +4,7 @@ import frc.drivetrain.Tank;
 
 public class FieldMappingThread extends Thread {
 
-    private static final long TIME_STEP = 10;
+    private static final long TIME_STEP = 20;
     private static final double dT = TIME_STEP / 1000.0;
 
     private Tank tank;

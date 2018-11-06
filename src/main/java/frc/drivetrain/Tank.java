@@ -12,7 +12,7 @@ public class Tank {
 
     private final double TICKS_TO_METERS;
     private final double WIDTH;
-    private final double MAX_SPEED;
+    public final double MAX_SPEED;
 
     private TalonSRX leftMotor;
     private TalonSRX rightMotor;
@@ -72,6 +72,11 @@ public class Tank {
         talon.config_kI(0, 0, 0);
         talon.config_kD(0, 0, 0);
         talon.config_kF(0, kF, 0);
+
+        talon.config_kP(1, 0, 0);
+        talon.config_kI(1, 0, 0);
+        talon.config_kD(1, 0, 0);
+        talon.config_kF(1, 0, 0);
     }
 
     public TankData getTankData() {
@@ -85,6 +90,10 @@ public class Tank {
         td.gyroAngle = Math.toRadians(gyro.getAngle());
         td.gyroW = Math.toRadians(gyro.getRate());
         return td;
+    }
+
+    public void printError() {
+        System.out.println("Error: " + leftMotor.getClosedLoopError(0) + ", " + rightMotor.getClosedLoopError(0));
     }
 
 }

@@ -7,11 +7,15 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.GenericHID.Hand;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.XboxController;
 import frc.config.Config;
 import frc.drivetrain.Tank;
 import frc.fieldmapping.EncoderPositionTracker;
 import frc.fieldmapping.FieldMappingThread;
+import frc.drivetrain.TankData;
 
 public class Robot extends IterativeRobot {
 
@@ -51,5 +55,27 @@ public class Robot extends IterativeRobot {
     @Override
     public void teleopPeriodic() {
         teleop.periodic();
+        printPosTracking();
+    }
+
+    private void printPosTracking() {
+        SmartDashboard.putNumber("x position", tracker.getX());
+        SmartDashboard.putNumber("y position", tracker.getY());
+    }
+
+    private XboxController xbox = new XboxController(0);
+
+    @Override
+    public void testPeriodic() {
+        if (xbox.getAButton()) {
+            tank.setRaw(0.5, 0.5);
+        } else if (xbox.getBButton()) {
+            tank.setRaw(-0.5, -0.5);
+        } else {
+            tank.setRaw(-xbox.getY(Hand.kLeft), -xbox.getY(Hand.kRight));
+        }
+        TankData td = tank.getTankData();
+        System.out.println(td.leftSpeed + ", " + td.rightSpeed + ", " + td.avgSpeed);
+        printPosTracking();
     }
 }
