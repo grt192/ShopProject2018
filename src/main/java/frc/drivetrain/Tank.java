@@ -13,6 +13,7 @@ public class Tank {
     private final double TICKS_TO_METERS;
     private final double WIDTH;
     public final double MAX_SPEED;
+    public final double MAX_ANGULAR_SPEED;
 
     private TalonSRX leftMotor;
     private TalonSRX rightMotor;
@@ -22,6 +23,7 @@ public class Tank {
         TICKS_TO_METERS = Config.getDouble("ticks_to_meters");
         WIDTH = Config.getDouble("dt_width");
         MAX_SPEED = Config.getDouble("max_speed");
+        MAX_ANGULAR_SPEED = MAX_SPEED / (WIDTH / 2);
 
         gyro = new AHRS(Port.kMXP);
 
