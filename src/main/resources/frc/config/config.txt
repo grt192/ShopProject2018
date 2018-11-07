@@ -1,11 +1,4 @@
 # Config file for shop project robots
-
-left-drive-encoder=
-left-drive-assist=
-
-right-drive-encoder=
-right-drive-assist=
-
 pickup-pneumatic=
 
 pickup-pivot=
@@ -14,3 +7,15 @@ winch-left=
 winch-right=
 
 table-pivot=
+dt_width=0.73025
+ticks_to_meters=0.0005588
+
+max_speed=3.5
+
+left_inverted=false
+left_master=15
+left_follower=16
+right_inverted=true
+right_master=2
+right_follower=1
+

@@ -11,6 +11,9 @@ import edu.wpi.first.wpilibj.IterativeRobot;
 import frc.config.Config;
 import frc.mechs.Elevator;
 import frc.mechs.Pickup;
+import frc.drivetrain.Tank;
+import frc.fieldmapping.EncoderPositionTracker;
+import frc.fieldmapping.FieldMappingThread;
 
 public class Robot extends IterativeRobot {
 
@@ -19,6 +22,9 @@ public class Robot extends IterativeRobot {
 
     private Pickup pickup;
     private Elevator elevator;
+    private Tank tank;
+    private FieldMappingThread fieldMappingThread;
+    private EncoderPositionTracker tracker;
 
     @Override
     public void robotInit() {
@@ -27,6 +33,10 @@ public class Robot extends IterativeRobot {
         pickup = new Pickup();
         elevator = new Elevator();
 
+        tank = new Tank();
+        fieldMappingThread = new FieldMappingThread(tank);
+        fieldMappingThread.start();
+        tracker = fieldMappingThread.getTracker();
         auto = new Autonomous();
         teleop = new Teleop(pickup, elevator);
     }
@@ -48,6 +58,10 @@ public class Robot extends IterativeRobot {
 
     @Override
     public void teleopPeriodic() {
-        auto.periodic();
+        teleop.periodic();
+    }
+
+    @Override
+    public void testPeriodic() {
     }
 }
