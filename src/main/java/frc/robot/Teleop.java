@@ -23,7 +23,9 @@ public class Teleop {
 
 	public void periodic() {
 		double lSpeed = -xbox.getY(Hand.kLeft) * tank.MAX_SPEED;
-		double rSpeed = -xbox.getY(Hand.kLeft) * tank.MAX_SPEED;
+		double rSpeed = -xbox.getY(Hand.kRight) * tank.MAX_SPEED;
+		lSpeed = JoystickProfile.applyDeadband(lSpeed, 0.3);
+		rSpeed = JoystickProfile.applyDeadband(rSpeed, 0.3);
 		tank.set(lSpeed, rSpeed);
 		TankData td = tank.getTankData();
 		System.out.println("Intended: " + lSpeed + ", " + rSpeed);

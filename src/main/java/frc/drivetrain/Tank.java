@@ -21,7 +21,7 @@ public class Tank {
     public Tank() {
         TICKS_TO_METERS = Config.getDouble("ticks_to_meters");
         WIDTH = Config.getDouble("dt_width");
-        MAX_SPEED = Config.getInt("max_speed");
+        MAX_SPEED = Config.getDouble("max_speed");
 
         gyro = new AHRS(Port.kMXP);
 
@@ -52,7 +52,7 @@ public class Tank {
     }
 
     public void set(double lSpeed, double rSpeed) {
-        double scale = Math.min(1, MAX_SPEED / Math.max(lSpeed, rSpeed));
+        double scale = Math.min(1, MAX_SPEED / Math.max(Math.abs(lSpeed), Math.abs(rSpeed)));
         lSpeed *= scale;
         rSpeed *= scale;
         leftMotor.set(ControlMode.Velocity, lSpeed / (TICKS_TO_METERS * 10));
@@ -68,7 +68,7 @@ public class Tank {
     private void configPID(TalonSRX talon) {
         talon.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
         double kF = 1023 * 10 * TICKS_TO_METERS / MAX_SPEED;
-        talon.config_kP(0, kF * 5, 0);
+        talon.config_kP(0, kF * 2, 0);
         talon.config_kI(0, 0, 0);
         talon.config_kD(0, 0, 0);
         talon.config_kF(0, kF, 0);
@@ -94,6 +94,8 @@ public class Tank {
 
     public void printError() {
         System.out.println("Error: " + leftMotor.getClosedLoopError(0) + ", " + rightMotor.getClosedLoopError(0));
+        System.out.println(leftMotor.getClosedLoopTarget(0));
+        System.out.println(leftMotor.getMotorOutputPercent());
     }
 
 }
