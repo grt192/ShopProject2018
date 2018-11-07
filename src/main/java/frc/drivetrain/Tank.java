@@ -13,6 +13,8 @@ public class Tank {
     private final double TICKS_TO_METERS;
     private final double WIDTH;
     public final double MAX_SPEED;
+    private final double METERS_TO_FEET;
+    private final double TICKS_TO_FEET;
 
     private TalonSRX leftMotor;
     private TalonSRX rightMotor;
@@ -22,7 +24,8 @@ public class Tank {
         TICKS_TO_METERS = Config.getDouble("ticks_to_meters");
         WIDTH = Config.getDouble("dt_width");
         MAX_SPEED = Config.getDouble("max_speed");
-
+        METERS_TO_FEET = Config.getDouble("meters_to_feet");
+        TICKS_TO_FEET = TICKS_TO_METERS * METERS_TO_FEET;
         gyro = new AHRS(Port.kMXP);
 
         leftMotor = new TalonSRX(Config.getInt("left_master"));
@@ -55,8 +58,8 @@ public class Tank {
         double scale = Math.min(1, MAX_SPEED / Math.max(Math.abs(lSpeed), Math.abs(rSpeed)));
         lSpeed *= scale;
         rSpeed *= scale;
-        leftMotor.set(ControlMode.Velocity, lSpeed / (TICKS_TO_METERS * 10));
-        rightMotor.set(ControlMode.Velocity, rSpeed / (TICKS_TO_METERS * 10));
+        leftMotor.set(ControlMode.Velocity, lSpeed / (TICKS_TO_FEET * 10));
+        rightMotor.set(ControlMode.Velocity, rSpeed / (TICKS_TO_FEET * 10));
     }
 
     public void setPolar(double speed, double angVel) {
@@ -67,7 +70,7 @@ public class Tank {
 
     private void configPID(TalonSRX talon) {
         talon.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
-        double kF = 1023 * 10 * TICKS_TO_METERS / MAX_SPEED;
+        double kF = 1023 * 10 * TICKS_TO_FEET / MAX_SPEED;
         talon.config_kP(0, kF * 2, 0);
         talon.config_kI(0, 0, 0);
         talon.config_kD(0, 0, 0);
@@ -81,8 +84,8 @@ public class Tank {
 
     public TankData getTankData() {
         TankData td = new TankData();
-        double leftSpeed = leftMotor.getSelectedSensorVelocity(0) * TICKS_TO_METERS * 10;
-        double rightSpeed = rightMotor.getSelectedSensorVelocity(0) * TICKS_TO_METERS * 10;
+        double leftSpeed = leftMotor.getSelectedSensorVelocity(0) * TICKS_TO_FEET * 10;
+        double rightSpeed = rightMotor.getSelectedSensorVelocity(0) * TICKS_TO_FEET * 10;
         td.leftSpeed = leftSpeed;
         td.rightSpeed = rightSpeed;
         td.avgSpeed = (leftSpeed + rightSpeed) / 2;
