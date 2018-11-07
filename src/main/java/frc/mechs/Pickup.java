@@ -1,5 +1,6 @@
 package frc.mechs;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.Solenoid;
@@ -22,7 +23,12 @@ public class Pickup {
         pickupPneumatic.set(state);
     }
 
-    public void setPickupPosition(int i) {
+    public void setPickupPivotPosition(int position) {
         // to implement
+        pickupPivot.set(ControlMode.Position, position);
+    }
+
+    public void setPickupPivotPower(double power) {
+        pickupPivot.set(ControlMode.PercentOutput, power);
     }
 }

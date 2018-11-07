@@ -10,50 +10,24 @@ public class Elevator {
     private TalonSRX winchLeft;
     private TalonSRX winchRight;
 
-    private TalonSRX trayPivot;
+    public static final int TOP = 10000;
+    public static final int MIDDLE = 5000;
+    public static final int BOTTOM = 0;
 
     public Elevator() {
         winchLeft = new TalonSRX(Config.getInt("winch-left"));
         winchRight = new TalonSRX(Config.getInt("winch-right"));
 
-        trayPivot = new TalonSRX(Config.getInt("tray-pivot"));
+        winchRight.follow(winchLeft);
     }
 
-    public enum ElevatorPosition {
-        GROUND, MIDDLE, TOP
-    }
-
-    public void setElevatorPosition(ElevatorPosition position) {
-        // Set position
-        switch (position) {
-        case GROUND:
-            // Go to ground level
-            break;
-
-        case MIDDLE:
-            // go to Middle level
-            break;
-
-        case TOP:
-            // go to top level
-            break;
-
-        default:
-            System.out.println("Elevator Position did not like to work");
-        }
+    public void setElevatorPosition(int position) {
+        winchLeft.set(ControlMode.Position, position);
     }
 
     public void setElevatorPower(double power) {
         // Remeber to mess with direction
         winchLeft.set(ControlMode.PercentOutput, power);
         winchRight.set(ControlMode.Follower, winchLeft.getDeviceID());
-    }
-
-    public void setTrayPosition(int i) {
-        // Set position of Tray
-    }
-
-    public void setTrayPower(double power) {
-        trayPivot.set(ControlMode.PercentOutput, power);
     }
 }
