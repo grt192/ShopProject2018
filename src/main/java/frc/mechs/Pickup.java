@@ -12,6 +12,9 @@ public class Pickup {
 
     private TalonSRX pickupPivot;
 
+    public static final int armDown = 10000;
+    public static final int armUp = 5000;
+
     public Pickup() {
         pickupPneumatic = new Solenoid(Config.getInt("pickup-pneumatic"));
 

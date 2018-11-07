@@ -19,6 +19,7 @@ public class Elevator {
         winchRight = new TalonSRX(Config.getInt("winch-right"));
 
         winchRight.follow(winchLeft);
+
     }
 
     public void setElevatorPosition(int position) {
@@ -28,6 +29,5 @@ public class Elevator {
     public void setElevatorPower(double power) {
         // Remeber to mess with direction
         winchLeft.set(ControlMode.PercentOutput, power);
-        winchRight.set(ControlMode.Follower, winchLeft.getDeviceID());
     }
 }
