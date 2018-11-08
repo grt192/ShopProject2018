@@ -67,7 +67,7 @@ public class Tank {
 
     private void configPID(TalonSRX talon) {
         talon.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
-        double kF = 1023 * 10 * TICKS_TO_FEET / MAX_SPEED;
+        double kF = 1023 * 10 * TICKS_TO_METERS / MAX_SPEED;
         talon.config_kP(0, kF * 2, 0);
         talon.config_kI(0, 0, 0);
         talon.config_kD(0, 0, 0);
