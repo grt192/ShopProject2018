@@ -1,1 +1,4 @@
 # Config file for shop project robots
+
+leftSol =
+rightSol =
