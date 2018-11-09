@@ -19,6 +19,12 @@ public class Pickup {
         pickupPneumatic = new Solenoid(Config.getInt("pickup_pneumatic"));
 
         pickupPivot = new TalonSRX(Config.getInt("pickup_pivot"));
+
+        pickupPivot.config_kP(0, 1, 0);
+        pickupPivot.config_kI(0, 0, 0);
+        pickupPivot.config_kD(0, 0, 0);
+
+        pickupPivot.config_kF(0, 0, 0);
     }
 
     // Would setGrab be a better name?

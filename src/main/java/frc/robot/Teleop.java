@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import frc.drivetrain.Tank;
 import frc.mechs.Elevator;
+import frc.mechs.MechCollection;
 import frc.mechs.Pickup;
 
 public class Teleop {
@@ -11,13 +12,11 @@ public class Teleop {
 	private XboxController xboxMechs;
 	private XboxController xboxDrive;
 
-	private Pickup pickup;
-	private Elevator elevator;
+	MechCollection mechs;
 	private Tank drive;
 
-	public Teleop(Pickup pickup, Elevator elevator, Tank drive) {
-		this.pickup = pickup;
-		this.elevator = elevator;
+	public Teleop(MechCollection mechs, Tank drive) {
+		this.mechs = mechs;
 		this.drive = drive;
 
 		xboxMechs = new XboxController(0);
@@ -29,25 +28,32 @@ public class Teleop {
 	}
 
 	public void periodic() {
+		drive.set((-2.0) * JoystickProfile.applyDeadband(xboxDrive.getY(Hand.kLeft)),
+				(-2.0) * JoystickProfile.applyDeadband(xboxDrive.getY(Hand.kRight)));
+
 		if (xboxMechs.getAButton()) {
-			pickup.setPickup(true);
+			mechs.pickup.setPickup(true);
 		} else if (xboxMechs.getBButton()) {
-			pickup.setPickup(false);
+			mechs.pickup.setPickup(false);
 		}
 
-		drive.setRaw(deadband(xboxDrive.getY(Hand.kLeft)), deadband(xboxDrive.getY(Hand.kRight)));
+		if (xboxMechs.getPOV() == 0) {
+			mechs.elevator.setElevatorPosition(Elevator.TOP);
+		} else if (xboxMechs.getPOV() == 2) {
+			mechs.elevator.setElevatorPosition(Elevator.MIDDLE);
+		} else if (xboxMechs.getPOV() == 4) {
+			mechs.elevator.setElevatorPosition(Elevator.BOTTOM);
+		}
 
-		// Set Pickup pivot position (manual and to position)
+		mechs.pickup.setPickupPivotPower((-0.5) * JoystickProfile.applyDeadband(xboxDrive.getY(Hand.kLeft)));
 
-		// Set Tray pivot Position (to position)
+		mechs.elevator.setElevatorPower((-0.5) * JoystickProfile.applyDeadband(xboxMechs.getY(Hand.kRight)));
 
-		// Set Elevator height (manual and to position)
-	}
+		if (xboxMechs.getXButton()) {
+			mechs.pickup.setPickupPivotPosition(Pickup.armDown);
+		} else if (xboxMechs.getYButton()) {
+			mechs.pickup.setPickupPivotPosition(Pickup.armUp);
+		}
 
-	private double deadbandThreshold = 0.1;
-
-	private double deadband(double input) {
-
-		return (input < deadbandThreshold) ? deadbandThreshold : input;
 	}
 }
