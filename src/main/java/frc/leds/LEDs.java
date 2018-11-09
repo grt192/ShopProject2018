@@ -23,5 +23,7 @@ public class LEDs {
 
   private SerialPort arduinoPort = new SerialPort(9600, Port.kUSB);
 
-  
+  private void sayHi(SerialPort serial) {
+    serial.writeString("hi");
+  }
 }

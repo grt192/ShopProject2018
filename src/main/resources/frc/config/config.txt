@@ -1,12 +1,14 @@
 # Config file for shop project robots
-pickup-pneumatic=
+pickup_pneumatic=
 
-pickup-pivot=
+pickup_pivot=
 
-winch-left=
-winch-right=
+winch_left=
+winch_right=
 
-table-pivot=
+table_pivot=
+
+
 dt_width=0.73025
 ticks_to_meters=0.0005588
 

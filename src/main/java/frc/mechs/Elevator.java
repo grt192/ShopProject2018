@@ -15,8 +15,14 @@ public class Elevator {
     public static final int BOTTOM = 0;
 
     public Elevator() {
-        winchLeft = new TalonSRX(Config.getInt("winch-left"));
-        winchRight = new TalonSRX(Config.getInt("winch-right"));
+        winchLeft = new TalonSRX(Config.getInt("winch_left"));
+        winchRight = new TalonSRX(Config.getInt("winch_right"));
+
+        winchLeft.config_kP(0, 1, 0);
+        winchLeft.config_kI(0, 0, 0);
+        winchLeft.config_kD(0, 0, 0);
+
+        winchLeft.config_kF(0, 0, 0);
 
         winchRight.follow(winchLeft);
 
