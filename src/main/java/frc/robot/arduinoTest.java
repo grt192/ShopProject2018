@@ -1,21 +1,25 @@
 package frc.robot;
 
-import edu.wpi.first.wpilibj.SerialPort;
+import frc.drivetrain.Tank;
+import frc.leds.LEDs;
+import frc.mechs.MechCollection;
 
 public class ArduinoTest {
 
-	SerialPort arduinoSerial;
+	public LEDs arduinoSerial;
 
-	public ArduinoTest() {
-		arduinoSerial = new SerialPort(9600, SerialPort.Port.kUSB);
-	}
+	private Tank tank;
+	private MechCollection mechs;
 
 	public void init() {
+		arduinoSerial = new LEDs(tank, mechs);
 
+		tank = new Tank();
+		mechs = new MechCollection();
 	}
 
 	public void periodic() {
-		arduinoSerial.writeString("hi");
+		arduinoSerial.sayHi();
 	}
 
 }
