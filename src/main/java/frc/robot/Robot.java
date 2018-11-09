@@ -9,12 +9,10 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import frc.config.Config;
-import frc.mechs.Elevator;
-import frc.mechs.MechCollection;
-import frc.mechs.Pickup;
 import frc.drivetrain.Tank;
 import frc.fieldmapping.EncoderPositionTracker;
 import frc.fieldmapping.FieldMappingThread;
+import frc.mechs.MechCollection;
 
 public class Robot extends IterativeRobot {
 

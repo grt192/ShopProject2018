@@ -1,9 +1,6 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.SerialPort;
-import edu.wpi.first.wpilibj.XboxController;
-import frc.mechs.Elevator;
-import frc.mechs.Pickup;
 
 public class ArduinoTest {
 
