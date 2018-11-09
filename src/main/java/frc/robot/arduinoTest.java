@@ -5,12 +5,12 @@ import edu.wpi.first.wpilibj.XboxController;
 import frc.mechs.Elevator;
 import frc.mechs.Pickup;
 
-public class arduinoTest {
+public class ArduinoTest {
 
-	SerialPort arduino;
+	SerialPort arduinoSerial;
 
-	public arduinoTest() {
-		arduino = new SerialPort(9600, SerialPort.Port.kUSB);
+	public ArduinoTest() {
+		arduinoSerial = new SerialPort(9600, SerialPort.Port.kUSB);
 	}
 
 	public void init() {
@@ -18,7 +18,7 @@ public class arduinoTest {
 	}
 
 	public void periodic() {
-		
+		arduinoSerial.writeString("hi");
 	}
 
 }
