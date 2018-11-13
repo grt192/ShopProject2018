@@ -6,9 +6,9 @@ import frc.drivetrain.ChooseMode;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.SpeedController;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.ControlMode;
 
 public class Tank {
 
@@ -36,15 +36,15 @@ public class Tank {
      * @param aDriverJoystick
      *                                  Argument Driver Joy stick
      */
-    public Tank(SpeedController SpeedControllerLeft, SpeedController SpeedControllerRight, ChooseMode DriverJoystick,
-            Encoder EncoderLeft, Encoder EncoderRight) {
+    public Tank(SpeedController tSpeedControllerLeft, SpeedController tSpeedControllerRight, ChooseMode tDriverJoystick,
+            Encoder tEncoderLeft, Encoder tEncoderRight) {
 
-        SpeedControllerLeft = SpeedControllerLeft;
-        SpeedControllerRight = SpeedControllerRight;
-        DriverJoystick = DriverJoystick;
+        SpeedControllerLeft = tSpeedControllerLeft;
+        SpeedControllerRight = tSpeedControllerRight;
+        DriverJoystick = tDriverJoystick;
         RobotDrive = new DifferentialDrive(SpeedControllerLeft, SpeedControllerRight);
-        EncoderLeft = EncoderLeft;
-        EncoderRight = EncoderRight;
+        EncoderLeft = tEncoderLeft;
+        EncoderRight = tEncoderRight;
 
         RobotDrive.setSafetyEnabled(false);
 
@@ -92,8 +92,9 @@ public class Tank {
 
     }
 
-    public void setMotorSpeed(double aLeft, double aRight) {
-        RobotDrive.setLeftRightMotorOutputs(aLeft, aRight);
+    public void setMotorSpeed(double speedL, double speedR) {
+        leftMotor.set(ControlMode.Velocity, speedL);
+        rightMotor.set(ControlMode.Velocity, speedR);
     }
 
     public double calculateDistanceRight() {
