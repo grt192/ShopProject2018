@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.SpeedController;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 
-public class Tank {
+public class DriveControl {
 
     private SpeedController SpeedControllerLeft;
     private SpeedController SpeedControllerRight;
@@ -36,8 +36,8 @@ public class Tank {
      * @param aDriverJoystick
      *                                  Argument Driver Joy stick
      */
-    public Tank(SpeedController tSpeedControllerLeft, SpeedController tSpeedControllerRight, ChooseMode tDriverJoystick,
-            Encoder tEncoderLeft, Encoder tEncoderRight) {
+    public DriveControl(SpeedController tSpeedControllerLeft, SpeedController tSpeedControllerRight,
+            ChooseMode tDriverJoystick, Encoder tEncoderLeft, Encoder tEncoderRight) {
 
         SpeedControllerLeft = tSpeedControllerLeft;
         SpeedControllerRight = tSpeedControllerRight;
