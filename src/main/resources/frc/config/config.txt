@@ -2,3 +2,13 @@
 
 leftSol =
 rightSol =
+
+armMotor1 =
+armMotor2 =
+armMotor3 =
+
+leftMotor =
+rightMotor =
+
+encLeft = 
+encRight =
