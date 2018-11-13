@@ -33,7 +33,7 @@ public class Robot extends IterativeRobot {
         fieldMappingThread = new FieldMappingThread(tank);
         fieldMappingThread.start();
         tracker = fieldMappingThread.getTracker();
-        auto = new Autonomous(mechCollection, tank);
+        auto = new Autonomous(mechCollection, tank, tracker);
         teleop = new Teleop(mechCollection, tank);
     }
 
