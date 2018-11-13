@@ -90,7 +90,7 @@ public class Tank {
         td.rightSpeed = rightSpeed;
         td.avgSpeed = (leftSpeed + rightSpeed) / 2;
         td.encoderW = (leftSpeed - rightSpeed) / WIDTH;
-        td.gyroAngle = GRTUtil.positiveMod(Math.toRadians(gyro.getAngle()), GRTUtil.TWO_PI);
+        td.gyroAngle = Math.toRadians(gyro.getAngle());
         td.gyroW = Math.toRadians(gyro.getRate());
         return td;
     }
