@@ -64,4 +64,9 @@ public class Robot extends IterativeRobot {
     @Override
     public void testPeriodic() {
     }
+
+    @Override
+    public void disabledInit() {
+        auto.disable();
+    }
 }
