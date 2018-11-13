@@ -38,6 +38,7 @@ public class Robot extends IterativeRobot {
         fieldMappingThread.start();
         tracker = fieldMappingThread.getTracker();
         mcl = new MonteCarloLocalizer(tank, 100);
+        mcl.initialize(0, 0, 0);
         mcl.start();
         auto = new Autonomous();
         teleop = new Teleop();
@@ -61,10 +62,6 @@ public class Robot extends IterativeRobot {
     @Override
     public void teleopPeriodic() {
         teleop.periodic();
-    }
-
-    @Override
-    public void testPeriodic() {
         double l = (-2.0) * JoystickProfile.applyDeadband(xbox.getY(Hand.kLeft));
         double r = (-2.0) * JoystickProfile.applyDeadband(xbox.getY(Hand.kRight));
         tank.set(l, r);
@@ -72,5 +69,9 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putNumber("Basic Y", tracker.getY());
         SmartDashboard.putNumber("MCL X", mcl.getX());
         SmartDashboard.putNumber("MCL Y", mcl.getY());
+    }
+
+    @Override
+    public void testPeriodic() {
     }
 }

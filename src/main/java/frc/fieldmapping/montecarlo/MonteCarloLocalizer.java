@@ -9,7 +9,7 @@ import frc.robot.GRTUtil;
 public class MonteCarloLocalizer extends Thread {
 
     private static final double GYRO_STDDEV = 0.01;
-    private static final double WHEEL_NOISE = 0.05;
+    private static final double WHEEL_NOISE = 0.05 * 0;
 
     private static final long TIME_STEP = 20;
     private static final double dT = TIME_STEP / 1000.0;

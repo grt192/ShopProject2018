@@ -18,7 +18,7 @@ class MCState {
             double r = encoderV / encoderW;
             double theta = angle + encoderW * dT;
             x += r * (Math.sin(theta) - Math.sin(angle));
-            y += r * (Math.cos(angle) - Math.sin(theta));
+            y += r * (Math.cos(angle) - Math.cos(theta));
             angle += encoderV * dT;
         }
     }
