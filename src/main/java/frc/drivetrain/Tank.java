@@ -11,7 +11,7 @@ import frc.config.Config;
 public class Tank {
 
     private final double TICKS_TO_METERS;
-    private final double WIDTH;
+    public final double WIDTH;
     public final double MAX_SPEED;
     public final double MAX_ANGULAR_SPEED;
 

@@ -18,4 +18,12 @@ public class GRTUtil {
 		return x >= min && x <= max;
 	}
 
+	public static double normPDF(double x) {
+		return Math.exp(-x * x / 2) / Math.sqrt(2 * Math.PI);
+	}
+
+	public static double normPDF(double x, double mu, double sigma) {
+		return normPDF((x - mu) / sigma) / sigma;
+	}
+
 }
