@@ -6,9 +6,9 @@ import frc.drivetrain.Tank;
 import frc.drivetrain.TankData;
 import frc.robot.GRTUtil;
 
-public class MonteCarloLocalizer {
+public class MonteCarloLocalizer extends Thread {
 
-    private static final double GYRO_STDDEV = 0.02;
+    private static final double GYRO_STDDEV = 0.01;
     private static final double WHEEL_NOISE = 0.05;
 
     private static final long TIME_STEP = 20;
@@ -16,6 +16,7 @@ public class MonteCarloLocalizer {
 
     private Tank drive;
     private MCState[] states;
+    private MCState averageState;
     private Random rand;
     private WeightedChooser chooser;
 
@@ -43,6 +44,19 @@ public class MonteCarloLocalizer {
         for (int i = 0; i < states.length; i++) {
             nextStates[i] = states[chooser.choose()].copy();
         }
+        states = nextStates;
+        double x = 0;
+        double y = 0;
+        double theta = 0;
+        for (int i = 0; i < states.length; i++) {
+            x += states[i].x;
+            y += states[i].y;
+            theta += GRTUtil.positiveMod(states[i].angle, GRTUtil.TWO_PI);
+        }
+        x /= states.length;
+        y /= states.length;
+        theta /= states.length;
+        averageState = new MCState(x, y, theta);
     }
 
     private void updateState(MCState state, TankData data) {
@@ -54,6 +68,37 @@ public class MonteCarloLocalizer {
     }
 
     private double getWeight(MCState state, TankData data) {
-        return GRTUtil.normPDF(state.angle, data.gyroAngle, GYRO_STDDEV);
+        double angle = GRTUtil.positiveMod(data.gyroAngle, GRTUtil.TWO_PI);
+        return GRTUtil.normPDF(state.angle, angle, GYRO_STDDEV);
+    }
+
+    public double getX() {
+        return averageState.x;
+    }
+
+    public double getY() {
+        return averageState.y;
+    }
+
+    public double getAngle() {
+        return averageState.angle;
+    }
+
+    public void run() {
+        long nextLoop = System.currentTimeMillis();
+        while (true) {
+            nextLoop += TIME_STEP;
+            update();
+            long sleepTime = nextLoop - System.currentTimeMillis();
+            if (sleepTime > 0) {
+                try {
+                    Thread.sleep(sleepTime);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                System.out.println("Field mapping thread too slow");
+            }
+        }
     }
 }

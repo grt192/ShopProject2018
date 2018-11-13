@@ -6,6 +6,8 @@ public class GRTUtil {
 	private GRTUtil() {
 	}
 
+	public static final double TWO_PI = 2 * Math.PI;
+
 	public static double clamp(double min, double x, double max) {
 		return Math.min(Math.max(min, x), max);
 	}
