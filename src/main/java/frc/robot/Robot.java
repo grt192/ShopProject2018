@@ -41,4 +41,9 @@ public class Robot extends IterativeRobot {
     public void teleopPeriodic() {
         auto.periodic();
     }
+
+    @Override
+    public void disabledInit() {
+        auto.disable();
+    }
 }
