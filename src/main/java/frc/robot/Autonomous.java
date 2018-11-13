@@ -42,11 +42,11 @@ public class Autonomous implements Runnable {
 		}
 		tank.set(0, 0);
 		pickup.setPickupPivotPosition(Pickup.downPosition);
-		thread.sleep(1000);
+		Thread.sleep(1000);
 		pickup.setPickup(true);
-		thread.sleep(1000);
+		Thread.sleep(1000);
 		pickup.setPickupPivotPosition(Pickup.upPosition);
-		thread.sleep(1000);
+		Thread.sleep(1000);
 		while (tank.getTankData().gyroAngle < Math.PI / 2) {
 			tank.setPolar(0, Math.PI / 2);
 		}
@@ -56,11 +56,11 @@ public class Autonomous implements Runnable {
 		}
 		tank.set(0, 0);
 		elevator.setElevatorPosition(Elevator.TOP);
-		thread.sleep(1000);
+		Thread.sleep(1000);
 		elevator.setTrayPosition(Elevator.UP);
-		thread.sleep(1000);
+		Thread.sleep(1000);
 		elevator.setTrayPosition(Elevator.UP);
-		thread.sleep(1000);
+		Thread.sleep(1000);
 		elevator.setElevatorPosition(Elevator.BOTTOM);
 	}
 
