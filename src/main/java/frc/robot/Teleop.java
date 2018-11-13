@@ -1,7 +1,10 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.GenericHID.Hand;
+import frc.drivetrain.Tank;
 import frc.mechs.Elevator;
+import frc.mechs.MechCollection;
 import frc.mechs.Pickup;
 
 public class Teleop {
@@ -9,12 +12,12 @@ public class Teleop {
 	private XboxController xboxMechs;
 	private XboxController xboxDrive;
 
-	private Pickup pickup;
-	private Elevator elevator;
+	MechCollection mechs;
+	private Tank drive;
 
-	public Teleop(Pickup pickup, Elevator elevator) {
-		this.pickup = pickup;
-		this.elevator = elevator;
+	public Teleop(MechCollection mechs, Tank drive) {
+		this.mechs = mechs;
+		this.drive = drive;
 
 		xboxMechs = new XboxController(0);
 		xboxDrive = new XboxController(1);
@@ -25,17 +28,32 @@ public class Teleop {
 	}
 
 	public void periodic() {
+		drive.set((-2.0) * JoystickProfile.applyDeadband(xboxDrive.getY(Hand.kLeft)),
+				(-2.0) * JoystickProfile.applyDeadband(xboxDrive.getY(Hand.kRight)));
+
 		if (xboxMechs.getAButton()) {
-			pickup.setPickup(true);
+			mechs.pickup.setPickup(true);
 		} else if (xboxMechs.getBButton()) {
-			pickup.setPickup(false);
+			mechs.pickup.setPickup(false);
 		}
 
-		// Set Pickup pivot position (manual and to position)
+		if (xboxMechs.getPOV() == 0) {
+			mechs.elevator.setElevatorPosition(Elevator.TOP);
+		} else if (xboxMechs.getPOV() == 2) {
+			mechs.elevator.setElevatorPosition(Elevator.MIDDLE);
+		} else if (xboxMechs.getPOV() == 4) {
+			mechs.elevator.setElevatorPosition(Elevator.BOTTOM);
+		}
 
-		// Set Tray pivot Position (to position)
+		mechs.pickup.setPickupPivotPower((-0.5) * JoystickProfile.applyDeadband(xboxDrive.getY(Hand.kLeft)));
 
-		// Set Elevator height (manual and to position)
+		mechs.elevator.setElevatorPower((-0.5) * JoystickProfile.applyDeadband(xboxMechs.getY(Hand.kRight)));
+
+		if (xboxMechs.getXButton()) {
+			mechs.pickup.setPickupPivotPosition(Pickup.armDown);
+		} else if (xboxMechs.getYButton()) {
+			mechs.pickup.setPickupPivotPosition(Pickup.armUp);
+		}
+
 	}
-
 }

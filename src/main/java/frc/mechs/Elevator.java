@@ -9,58 +9,40 @@ public class Elevator {
 
     private TalonSRX winchLeft;
     private TalonSRX winchRight;
+    private TalonSRX tray;
 
-    public static final int topFloor = Config.getInt("top_floor_elevator");
-    public static final int middleFloor = Config.getInt("middle_floor_elevator");
-    public static final int groundFloor = Config.getInt("ground_floor_elevator");
+    public static final int TOP = 10000;
+    public static final int MIDDLE = 5000;
+    public static final int BOTTOM = 0;
 
-    public static final int upTray = Config.getInt("tray_up");
-    public static final int downTray = Config.getInt("tray_down");
-
-    private TalonSRX trayPivot;
+    public static final int UP = 1;
+    public static final int DOWN = 0;
 
     public Elevator() {
-        winchLeft = new TalonSRX(Config.getInt("winch-left"));
-        winchRight = new TalonSRX(Config.getInt("winch-right"));
+        winchLeft = new TalonSRX(Config.getInt("winch_left"));
+        winchRight = new TalonSRX(Config.getInt("winch_right"));
+        tray = new TalonSRX(Config.getInt("tray"));
+        winchLeft.config_kP(0, 1, 0);
+        winchLeft.config_kI(0, 0, 0);
+        winchLeft.config_kD(0, 0, 0);
 
-        trayPivot = new TalonSRX(Config.getInt("tray-pivot"));
+        winchLeft.config_kF(0, 0, 0);
+
+        winchRight.follow(winchLeft);
+
     }
 
-    public enum ElevatorPosition {
-        GROUND, MIDDLE, TOP
+    public void setElevatorPosition(int position) {
+        winchLeft.set(ControlMode.Position, position);
     }
 
-    public void setElevatorPosition(ElevatorPosition position) {
-        // Set position
-        switch (position) {
-        case GROUND:
-            // Go to ground level
-            break;
+    public void setTrayPosition(int position) {
+        tray.set(ControlMode.Position, position);
 
-        case MIDDLE:
-            // go to Middle level
-            break;
-
-        case TOP:
-            // go to top level
-            break;
-
-        default:
-            System.out.println("Elevator Position did not like to work");
-        }
     }
 
     public void setElevatorPower(double power) {
         // Remeber to mess with direction
         winchLeft.set(ControlMode.PercentOutput, power);
-        winchRight.set(ControlMode.Follower, winchLeft.getDeviceID());
-    }
-
-    public void setTrayPosition(int i) {
-        // Set position of Tray
-    }
-
-    public void setTrayPower(double power) {
-        trayPivot.set(ControlMode.PercentOutput, power);
     }
 }
