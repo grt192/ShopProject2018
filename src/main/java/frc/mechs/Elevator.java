@@ -10,6 +10,13 @@ public class Elevator {
     private TalonSRX winchLeft;
     private TalonSRX winchRight;
 
+    public static final int topFloor = Config.getInt("top_floor_elevator");
+    public static final int middleFloor = Config.getInt("middle_floor_elevator");
+    public static final int groundFloor = Config.getInt("ground_floor_elevator");
+
+    public static final int upTray = Config.getInt("tray_up");
+    public static final int downTray = Config.getInt("tray_down");
+
     private TalonSRX trayPivot;
 
     public Elevator() {

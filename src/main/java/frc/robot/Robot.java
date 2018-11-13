@@ -21,7 +21,7 @@ public class Robot extends IterativeRobot {
     private Teleop teleop;
 
     private Pickup pickup;
-    private Elevator elevator;
+    Elevator elevator;
     private Tank tank;
     private FieldMappingThread fieldMappingThread;
     private EncoderPositionTracker tracker;
@@ -37,8 +37,29 @@ public class Robot extends IterativeRobot {
         fieldMappingThread = new FieldMappingThread(tank);
         fieldMappingThread.start();
         tracker = fieldMappingThread.getTracker();
-        auto = new Autonomous();
-        teleop = new Teleop(pickup, elevator);
+        auto = new Autonomous(this);
+        teleop = new Teleop(pickup, getElevator());
+    }
+
+    /**
+     * @return the elevator
+     */
+    public Elevator getElevator() {
+        return elevator;
+    }
+
+    /**
+     * @return the tank
+     */
+    public Tank getTank() {
+        return tank;
+    }
+
+    /**
+     * @return the pickup
+     */
+    public Pickup getPickup() {
+        return pickup;
     }
 
     @Override

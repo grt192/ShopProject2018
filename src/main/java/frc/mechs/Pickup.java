@@ -10,6 +10,8 @@ public class Pickup {
     private Solenoid pickupPneumatic;
 
     private TalonSRX pickupPivot;
+    public static final int downPosition = Config.getInt("pick_up_position_down");
+    public static final int upPosition = Config.getInt("pick_up_position_up");
 
     public Pickup() {
         pickupPneumatic = new Solenoid(Config.getInt("pickup-pneumatic"));

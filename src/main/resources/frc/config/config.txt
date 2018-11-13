@@ -19,3 +19,10 @@ right_inverted=true
 right_master=2
 right_follower=1
 
+pick_up_position_down=
+pick_up_position_down=
+top_floor_elevator=
+tray_down=
+tray_up=
+ground_floor_elevator=
+middle_floor_elevator=
