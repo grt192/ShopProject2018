@@ -8,10 +8,14 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.GenericHID.Hand;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.config.Config;
 import frc.drivetrain.Tank;
 import frc.fieldmapping.EncoderPositionTracker;
 import frc.fieldmapping.FieldMappingThread;
+import frc.fieldmapping.montecarlo.MonteCarloLocalizer;
 
 public class Robot extends IterativeRobot {
 
@@ -21,14 +25,20 @@ public class Robot extends IterativeRobot {
     private Tank tank;
     private FieldMappingThread fieldMappingThread;
     private EncoderPositionTracker tracker;
+    private MonteCarloLocalizer mcl;
+
+    private XboxController xbox;
 
     @Override
     public void robotInit() {
         Config.start();
+        xbox = new XboxController(0);
         tank = new Tank();
         fieldMappingThread = new FieldMappingThread(tank);
         fieldMappingThread.start();
         tracker = fieldMappingThread.getTracker();
+        mcl = new MonteCarloLocalizer(tank, 100);
+        mcl.start();
         auto = new Autonomous();
         teleop = new Teleop();
     }
@@ -55,5 +65,12 @@ public class Robot extends IterativeRobot {
 
     @Override
     public void testPeriodic() {
+        double l = (-2.0) * JoystickProfile.applyDeadband(xbox.getY(Hand.kLeft));
+        double r = (-2.0) * JoystickProfile.applyDeadband(xbox.getY(Hand.kRight));
+        tank.set(l, r);
+        SmartDashboard.putNumber("Basic X", tracker.getX());
+        SmartDashboard.putNumber("Basic Y", tracker.getY());
+        SmartDashboard.putNumber("MCL X", mcl.getX());
+        SmartDashboard.putNumber("MCL Y", mcl.getY());
     }
 }

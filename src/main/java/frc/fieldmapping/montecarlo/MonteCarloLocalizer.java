@@ -31,6 +31,7 @@ public class MonteCarloLocalizer extends Thread {
         for (int i = 0; i < states.length; i++) {
             states[i] = new MCState(x, y, theta);
         }
+        updateAverage();
     }
 
     public void update() {
@@ -45,6 +46,10 @@ public class MonteCarloLocalizer extends Thread {
             nextStates[i] = states[chooser.choose()].copy();
         }
         states = nextStates;
+        updateAverage();
+    }
+
+    private void updateAverage() {
         double x = 0;
         double y = 0;
         double theta = 0;
