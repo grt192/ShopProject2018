@@ -6,36 +6,41 @@ import frc.mechs.Elevator;
 import frc.mechs.Pickup;
 
 public class Autonomous {
-	private final Robot robot;
 
-	public Autonomous(Robot robot) {
-		this.robot = robot;
+	private final Elevator elevator;
+	private final Tank tank;
+	private final Pickup pickup;
+	private Thread thread;
+
+	public Autonomous(Elevator elevator, Tank tank, Pickup pickup) {
+		this.elevator = elevator;
+		this.tank = tank;
+		this.pickup = pickup;
 	}
 
 	public void init() {
 	}
 
 	public void periodic() {
-		robot.getTank().set(2.7 / 4, 2.7 / 4);
-		sleep(4000);
-		robot.getTank().set(0, 0);
-		robot.getPickup().setPickupPosition(Pickup.downPosition);
-		sleep(1000);
-		robot.getPickup().setPickup(true);
-		sleep(1000);
-		robot.getPickup().setPickupPosition(Pickup.upPosition);
-		sleep(1000);
-		robot.getTank().setPolar(0, 0.73025);
-		sleep(1000);
-		robot.getElevator().setElevatorPosition(Elevator.ElevatorPosition.TOP);
-		sleep(1000);
-		robot.getTank().set(4.5 / 4, 4.5 / 4);
-		sleep(4000);
-		robot.getElevator().setTrayPosition(Elevator.downTray);
-		sleep(1000);
-		robot.getElevator().setTrayPosition(Elevator.upTray);
-		sleep(1000);
-		robot.getElevator().setElevatorPosition(Elevator.ElevatorPosition.GROUND);
+		tank.set(2.7 / 4, 2.7 / 4);
+		// thread.sleep(4000);
+		tank.set(0, 0);
+		pickup.setPickupPosition(Pickup.downPosition);
+		// thread.sleep(1000);
+		pickup.setPickup(true);
+		// thread.sleep(1000);
+		pickup.setPickupPosition(Pickup.upPosition);
+		// thread.sleep(1000);
+		tank.setPolar(0, 0.73025);
+		// thread.sleep(1000);
+		elevator.setElevatorPosition(Elevator.ElevatorPosition.TOP);
+		tank.set(4.5 / 4, 4.5 / 4);
+		// thread.sleep(4000);
+		elevator.setTrayPosition(Elevator.downTray);
+		// thread.sleep(1000);
+		elevator.setTrayPosition(Elevator.upTray);
+		// thread.sleep(1000);
+		elevator.setElevatorPosition(Elevator.ElevatorPosition.GROUND);
 	}
 
 	private static final void sleep(long sleepTime) {
