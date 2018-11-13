@@ -7,6 +7,7 @@ import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.SPI.Port;
 import frc.config.Config;
+import frc.robot.GRTUtil;
 
 public class Tank {
 
@@ -89,7 +90,7 @@ public class Tank {
         td.rightSpeed = rightSpeed;
         td.avgSpeed = (leftSpeed + rightSpeed) / 2;
         td.encoderW = (leftSpeed - rightSpeed) / WIDTH;
-        td.gyroAngle = Math.toRadians(gyro.getAngle());
+        td.gyroAngle = GRTUtil.positiveMod(Math.toRadians(gyro.getAngle()), GRTUtil.TWO_PI);
         td.gyroW = Math.toRadians(gyro.getRate());
         return td;
     }
