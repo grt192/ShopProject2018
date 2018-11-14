@@ -1,9 +1,9 @@
 package frc.mechs;
 
+import frc.mechs.SensorToAngle;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
-import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.config.Config;
 
@@ -38,16 +38,13 @@ public class Arm {
         }
     }
 
-    public void raise() {
-        moveArmTo(180);
+    public void setArmPower(int position) {
+        motor1.set(ControlMode.Position, position);
     }
 
-    public void lower() {
-        moveArmTo(0);
-    }
+    public void setArmPosition(int position) {
+        motor1.set(ControlMode.PercentOutput, position);
 
-    public void flip() {
-        moveArmTo(225);
     }
 
 }

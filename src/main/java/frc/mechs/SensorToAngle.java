@@ -5,8 +5,7 @@ import edu.wpi.first.wpilibj.XboxController;
 
 public class SensorToAngle {
 
-    private Encoder output;
-    private Encoder output2;
+    private Encoder enc;
     private double lowVal;
     private double highVal;
     private double lowAngle = 0;
@@ -14,7 +13,7 @@ public class SensorToAngle {
     private XboxController controller;
 
     public SensorToAngle() {
-        Encoder output = new Encoder(0, 0);
+        enc = new Encoder(0, 1, false, Encoder.EncodingType.k4X);
     }
 
     public void calibrate() {
@@ -33,7 +32,7 @@ public class SensorToAngle {
                 e.printStackTrace();
             }
         }
-        lowVal = output.get();
+        lowVal = enc.get();
         while (!controller.getAButton())
             try {
                 Thread.sleep(50);
@@ -49,10 +48,11 @@ public class SensorToAngle {
                 e.printStackTrace();
             }
         }
-        highVal = output.get();
+        highVal = enc.get();
     }
 
     public double getArmAngle() {
-        return (double) ((output.get() - lowVal) / (highVal - lowVal) * (highAngle - lowAngle));
+        return (double) ((enc.get() - lowVal) / (highVal - lowVal) * (highAngle - lowAngle));
     }
+
 }

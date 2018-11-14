@@ -1,6 +1,5 @@
 package frc.robot;
 
-
 public class Teleop {
 
 	public Teleop() {
@@ -11,7 +10,6 @@ public class Teleop {
 	}
 
 	public void periodic() {
-
 	}
 
 }
