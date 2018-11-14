@@ -62,7 +62,7 @@ public class Autonomous implements Runnable {
 		Thread.sleep(2000);
 		elevator.setElevatorPosition(Elevator.BOTTOM);
 		Thread.sleep(2000);
-		tank.setPolarGradient(Math.PI / 2, Math.PI / 2);
+		tank.setPolarGradient(Math.PI, Math.PI / 2);
 	}
 
 	public void disable() {

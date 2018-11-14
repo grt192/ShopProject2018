@@ -78,13 +78,13 @@ public class Tank {
 
     public void setPolarGradient(double startspeed, double distance) throws InterruptedException {
 
-        while (getTankData().gyroAngle < -distance) {
-            setPolar(0, -startspeed);
-            while (getTankData().gyroAngle < -distance * 2 / 3) {
+        while (getTankData().gyroAngle < distance) {
+            setPolar(0, startspeed);
+            while (getTankData().gyroAngle < distance * 2 / 3) {
                 Thread.sleep(50);
             }
-            setPolar(0, -startspeed / 4);
-            while (getTankData().gyroAngle < -distance / 3) {
+            setPolar(0, startspeed / 4);
+            while (getTankData().gyroAngle < distance / 3) {
                 Thread.sleep(50);
             }
         }
