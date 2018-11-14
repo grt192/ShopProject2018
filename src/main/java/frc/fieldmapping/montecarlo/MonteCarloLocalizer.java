@@ -25,6 +25,7 @@ public class MonteCarloLocalizer extends Thread {
         states = new MCState[n];
         chooser = new WeightedChooser(n);
         rand = new Random();
+        averageState = new MCState(0, 0, 0);
     }
 
     public void initialize(double x, double y, double theta) {
@@ -58,10 +59,9 @@ public class MonteCarloLocalizer extends Thread {
             y += states[i].y;
             theta += GRTUtil.positiveMod(states[i].angle, GRTUtil.TWO_PI);
         }
-        x /= states.length;
-        y /= states.length;
-        theta /= states.length;
-        averageState = new MCState(x, y, theta);
+        averageState.x = x / states.length;
+        averageState.y = y / states.length;
+        averageState.angle = theta / states.length;
     }
 
     private void updateState(MCState state, TankData data) {
