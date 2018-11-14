@@ -37,22 +37,24 @@ public class Autonomous implements Runnable {
 	}
 
 	public void runAutonomous() throws InterruptedException {
+		tank.setPolar(2.7 / 4, 0);
 		while (tracker.getX() < 1) {
-			tank.set(2.7 / 4, 2.7 / 4);
+			Thread.sleep(50);
 		}
-		tank.set(0, 0);
+		tank.setPolar(0, 0);
 		pickup.setPickupPivotPosition(Pickup.downPosition);
 		Thread.sleep(1000);
 		pickup.setPickup(true);
 		Thread.sleep(1000);
 		pickup.setPickupPivotPosition(Pickup.upPosition);
 		Thread.sleep(1000);
-		while (tank.getTankData().gyroAngle < Math.PI / 2) {
-			tank.setPolar(0, Math.PI / 2);
+		tank.setPolar(0, -Math.PI / 2);
+		while (tank.getTankData().gyroAngle < -Math.PI / 2) {
+			Thread.sleep(50);
 		}
-
+		tank.setPolar(4.5 / 4, 0);
 		while (tracker.getY() < 2) {
-			tank.set(4.5 / 4, 4.5 / 4);
+			Thread.sleep(50);
 		}
 		tank.set(0, 0);
 		elevator.setElevatorPosition(Elevator.TOP);
