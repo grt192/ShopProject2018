@@ -48,8 +48,12 @@ void loop()
 
 double voltageToColor(String color, double voltage)
 {
-    double greenValue = 255.0 * (voltage - 7.0) / 6.0;
-    double redValue = 255.0 - greenValue;
+    double scale = clip((voltage - 7.0)/6.0);
+
+    //Scale using hsl (Hue saturation brightness) 0-120 100% 50% pattern
+    double redValue = clip( (255.0 - (255.0 * 2 * (scale - 0.5))), 0.0, 255.0);
+    double greenValue = clip( (255.0 * 2.0 * scale), 0.0, 255.0 );
+    
 
     if (color == "red")
     {
@@ -63,4 +67,12 @@ double voltageToColor(String color, double voltage)
     {
         return 0.0;
     }
+}
+
+double clip(double input){
+    return (input > 1.0) ? 1.0 : ((input < 0.0) ? 0.0 : input);
+}
+
+double clip(double input, double min, double max){
+    return (input > max) ? max : ((input < min) ? min : input);
 }
