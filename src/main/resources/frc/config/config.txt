@@ -1,12 +1,12 @@
 # Config file for shop project robots
-pickup_pneumatic=
+pickup_pneumatic=0
 
-pickup_pivot=
+pickup_pivot=0
 
-winch_left=
-winch_right=
+winch_left=0
+winch_right=0
 
-table_pivot=
+table_pivot=0
 
 
 dt_width=0.73025
@@ -21,3 +21,10 @@ right_inverted=true
 right_master=2
 right_follower=1
 
+pick_up_position_down=0
+pick_up_position_down=0
+top_floor_elevator=0
+tray_down=0
+tray_up=0
+ground_floor_elevator=0
+middle_floor_elevator=0
