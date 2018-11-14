@@ -50,13 +50,13 @@ public class Autonomous implements Runnable {
 			Thread.sleep(50);
 		}
 		tank.setPolar(0, 0);
-		arm.lower();
+		// arm.lower();
 		Thread.sleep(1000);
 		intake.pickOpen();
 		Thread.sleep(1000);
 		intake.pickClose();
 		Thread.sleep(1000);
-		arm.raise();
+		// arm.raise();
 		Thread.sleep(1000);
 		tank.setPolar(0, -Math.PI / 2);
 		System.out.print("Turning\n");
@@ -70,7 +70,7 @@ public class Autonomous implements Runnable {
 		}
 		tank.set(0, 0);
 		Thread.sleep(1000);
-		arm.flip();
+		// arm.flip();
 		Thread.sleep(1000);
 		intake.pickOpen();
 =======
