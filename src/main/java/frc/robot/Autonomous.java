@@ -49,7 +49,7 @@ public class Autonomous implements Runnable {
 		tank.setPolarGradient(-Math.PI / 2, -Math.PI / 2);
 		tank.setLinear(4.5 / 4);
 
-		while (tracker.getY() < 2) {
+		while (tracker.getY() > -2) {
 			Thread.sleep(50);
 		}
 		tank.stop();
