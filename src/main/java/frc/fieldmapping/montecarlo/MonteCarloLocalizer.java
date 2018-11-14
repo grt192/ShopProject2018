@@ -73,8 +73,9 @@ public class MonteCarloLocalizer extends Thread {
     }
 
     private double getWeight(MCState state, TankData data) {
-        double angle = GRTUtil.positiveMod(data.gyroAngle, GRTUtil.TWO_PI);
-        return GRTUtil.normPDF(state.angle, angle, GYRO_STDDEV);
+        double gyroAngle = GRTUtil.positiveMod(data.gyroAngle, GRTUtil.TWO_PI);
+        double angle = GRTUtil.positiveMod(state.angle, GRTUtil.TWO_PI);
+        return GRTUtil.normPDF(angle, gyroAngle, GYRO_STDDEV);
     }
 
     public double getX() {
