@@ -33,10 +33,10 @@ public class Teleop {
 
 		if (xboxMechs.getAButton()) {
 			mechs.intake.pickOpen();
-			;
+
 		} else if (xboxMechs.getBButton()) {
 			mechs.intake.pickClose();
-			;
+
 		}
 
 		if (xboxMechs.getPOV() == 0) {
