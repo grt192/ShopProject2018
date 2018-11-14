@@ -7,7 +7,6 @@ import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.SPI.Port;
 import frc.config.Config;
-import frc.robot.GRTUtil;
 
 public class Tank {
 
@@ -84,7 +83,7 @@ public class Tank {
             while (getTankData().gyroAngle < -distance * 2 / 3) {
                 Thread.sleep(50);
             }
-            setPolar(0, -startspeed / 3);
+            setPolar(0, -startspeed / 4);
             while (getTankData().gyroAngle < -distance / 3) {
                 Thread.sleep(50);
             }
