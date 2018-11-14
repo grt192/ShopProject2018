@@ -1,8 +1,6 @@
 package frc.robot;
 
-import frc.config.Config;
 import frc.drivetrain.Tank;
-import frc.drivetrain.TankData;
 import frc.fieldmapping.EncoderPositionTracker;
 import frc.mechs.Elevator;
 import frc.mechs.MechCollection;
@@ -37,32 +35,30 @@ public class Autonomous implements Runnable {
 	}
 
 	public void runAutonomous() throws InterruptedException {
-		tank.setPolar(2.7 / 4, 0);
+		tank.setLinear(2.7 / 4);
 		while (tracker.getX() < 1) {
 			Thread.sleep(50);
 		}
-		tank.setPolar(0, 0);
+		tank.stop();
 		pickup.setPickupPivotPosition(Pickup.downPosition);
-		Thread.sleep(1000);
+		Thread.sleep(2000);
 		pickup.setPickup(true);
-		Thread.sleep(1000);
+		Thread.sleep(2000);
 		pickup.setPickupPivotPosition(Pickup.upPosition);
-		Thread.sleep(1000);
-		tank.setPolar(0, -Math.PI / 2);
-		while (tank.getTankData().gyroAngle < -Math.PI / 2) {
-			Thread.sleep(50);
-		}
-		tank.setPolar(4.5 / 4, 0);
+		Thread.sleep(2000);
+		tank.setPolarGradient(-Math.PI / 2, -Math.PI / 2);
+		tank.setLinear(4.5 / 4);
+
 		while (tracker.getY() < 2) {
 			Thread.sleep(50);
 		}
-		tank.set(0, 0);
+		tank.stop();
 		elevator.setElevatorPosition(Elevator.TOP);
-		Thread.sleep(1000);
+		Thread.sleep(2000);
 		elevator.setTrayPosition(Elevator.UP);
-		Thread.sleep(1000);
+		Thread.sleep(2000);
 		elevator.setTrayPosition(Elevator.UP);
-		Thread.sleep(1000);
+		Thread.sleep(2000);
 		elevator.setElevatorPosition(Elevator.BOTTOM);
 	}
 
