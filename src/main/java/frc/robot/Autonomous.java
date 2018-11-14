@@ -42,6 +42,7 @@ public class Autonomous implements Runnable {
 			Thread.sleep(50);
 		}
 		tank.setPolar(0, 0);
+		System.out.print("Done moving forward\n");
 		pickup.setPickupPivotPosition(Pickup.downPosition);
 		Thread.sleep(1000);
 		pickup.setPickup(true);
@@ -49,14 +50,19 @@ public class Autonomous implements Runnable {
 		pickup.setPickupPivotPosition(Pickup.upPosition);
 		Thread.sleep(1000);
 		tank.setPolar(0, -Math.PI / 2);
-		while (tank.getTankData().gyroAngle < -Math.PI / 2) {
+		System.out.print("Turning\n");
+		System.out.println(tank.getTankData().gyroAngle);
+		while (tank.getTankData().gyroAngle > -Math.PI / 2) {
 			Thread.sleep(50);
+			System.out.println(tank.getTankData().gyroAngle);
 		}
+		System.out.println("Done turning");
 		tank.setPolar(4.5 / 4, 0);
-		while (tracker.getY() < 2) {
+		while (tracker.getY() > -2) {
 			Thread.sleep(50);
 		}
 		tank.set(0, 0);
+		System.out.println("Done moving");
 		elevator.setElevatorPosition(Elevator.TOP);
 		Thread.sleep(1000);
 		elevator.setTrayPosition(Elevator.UP);
@@ -72,7 +78,6 @@ public class Autonomous implements Runnable {
 	}
 
 	public void periodic() {
-
 	}
 
 }
