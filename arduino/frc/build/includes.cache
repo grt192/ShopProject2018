@@ -1,0 +1,32 @@
+[
+  {
+    "Sourcefile": "",
+    "Include": "",
+    "Includepath": "C:\\Program Files (x86)\\Arduino\\hardware\\arduino\\avr\\cores\\arduino"
+  },
+  {
+    "Sourcefile": "",
+    "Include": "",
+    "Includepath": "C:\\Program Files (x86)\\Arduino\\hardware\\arduino\\avr\\variants\\standard"
+  },
+  {
+    "Sourcefile": "c:\\Users\\Bid\\Documents\\grt_stuff\\ShopProject2018\\arduino\\frc\\build\\sketch\\grt-Serial.ino.cpp",
+    "Include": "Adafruit_NeoPixel.h",
+    "Includepath": "C:\\Users\\Bid\\Documents\\Arduino\\libraries\\Adafruit_NeoPixel"
+  },
+  {
+    "Sourcefile": "c:\\Users\\Bid\\Documents\\grt_stuff\\ShopProject2018\\arduino\\frc\\build\\sketch\\grt-Serial.ino.cpp",
+    "Include": "",
+    "Includepath": ""
+  },
+  {
+    "Sourcefile": "C:\\Users\\Bid\\Documents\\Arduino\\libraries\\Adafruit_NeoPixel\\Adafruit_NeoPixel.cpp",
+    "Include": "",
+    "Includepath": ""
+  },
+  {
+    "Sourcefile": "C:\\Users\\Bid\\Documents\\Arduino\\libraries\\Adafruit_NeoPixel\\esp8266.c",
+    "Include": "",
+    "Includepath": ""
+  }
+]
