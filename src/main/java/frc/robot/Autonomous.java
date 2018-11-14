@@ -36,7 +36,7 @@ public class Autonomous implements Runnable {
 
 	public void runAutonomous() throws InterruptedException {
 		tank.setLinear(2.7 / 4);
-		while (tracker.getX() < 1) {
+		while (tracker.getX() < 2.7) {
 			Thread.sleep(50);
 		}
 		tank.stop();
@@ -49,7 +49,7 @@ public class Autonomous implements Runnable {
 		tank.setPolarGradient(-Math.PI / 2, -Math.PI / 2);
 		tank.setLinear(4.5 / 4);
 
-		while (tracker.getY() > -2) {
+		while (tracker.getY() > -4.5) {
 			Thread.sleep(50);
 		}
 		tank.stop();
