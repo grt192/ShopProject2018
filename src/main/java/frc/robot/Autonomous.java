@@ -1,21 +1,12 @@
 package frc.robot;
 
-<<<<<<< HEAD
-import frc.config.Config;
 import frc.drivetrain.Tank;
-import frc.drivetrain.TankData;
 import frc.fieldmapping.EncoderPositionTracker;
 import frc.mechs.Arm;
-import frc.mechs.SensorToAngle;
+import frc.mechs.Intake;
 import frc.mechs.MechCollection;
-import frc.mechs.Intake;;
 
 public class Autonomous implements Runnable {
-=======
-public class Autonomous implements Runnable {
-
-	private Thread thread;
->>>>>>> origin/autonumous-framework
 
 	private final Arm arm;
 	private final Tank tank;
@@ -44,7 +35,6 @@ public class Autonomous implements Runnable {
 	}
 
 	public void runAutonomous() throws InterruptedException {
-<<<<<<< HEAD
 		tank.setPolar(2.7 / 4, 0);
 		while (tracker.getX() < 1) {
 			Thread.sleep(50);
@@ -73,9 +63,6 @@ public class Autonomous implements Runnable {
 		// arm.flip();
 		Thread.sleep(1000);
 		intake.pickOpen();
-=======
-		// autonoumous code here
->>>>>>> origin/autonumous-framework
 	}
 
 	public void disable() {
