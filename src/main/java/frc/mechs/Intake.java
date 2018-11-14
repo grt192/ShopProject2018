@@ -1,7 +1,7 @@
 package frc.mechs;
 
-import frc.config.*;
 import edu.wpi.first.wpilibj.Solenoid;
+import frc.config.Config;
 
 public class Intake {
 
