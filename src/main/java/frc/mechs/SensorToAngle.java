@@ -5,19 +5,16 @@ import edu.wpi.first.wpilibj.XboxController;
 
 public class SensorToAngle {
 
-    private double armPos;
     private Encoder output;
+    private Encoder output2;
     private double lowVal;
     private double highVal;
     private double lowAngle = 0;
     private double highAngle = 270;
     private XboxController controller;
 
-    public SensorToAngle(Encoder output, XboxController controller) {
-        this.output = output;
-        this.lowVal = lowVal;
-        this.highVal = highVal;
-        this.controller = controller;
+    public SensorToAngle() {
+        Encoder output = new Encoder(0, 0);
     }
 
     public void calibrate() {
@@ -55,7 +52,7 @@ public class SensorToAngle {
         highVal = output.get();
     }
 
-    public double getArmPos() {
+    public double getArmAngle() {
         return (double) ((output.get() - lowVal) / (highVal - lowVal) * (highAngle - lowAngle));
     }
 }

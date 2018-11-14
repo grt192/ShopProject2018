@@ -3,9 +3,9 @@
 leftSol =
 rightSol =
 
-armMotor1 =
-armMotor2 =
-armMotor3 =
+arm_motor1 =
+arm_motor2 =
+arm_motor3 =
 
 leftMotor =
 rightMotor =
