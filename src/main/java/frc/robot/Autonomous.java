@@ -55,9 +55,9 @@ public class Autonomous implements Runnable {
 		tank.stop();
 		elevator.setElevatorPosition(Elevator.TOP);
 		Thread.sleep(2000);
-		elevator.setTrayPosition(Elevator.UP);
+		pickup.setPickup(false);
 		Thread.sleep(2000);
-		elevator.setTrayPosition(Elevator.UP);
+		pickup.setPickupPivotPosition(Pickup.downPosition);
 		Thread.sleep(2000);
 		elevator.setElevatorPosition(Elevator.BOTTOM);
 	}
