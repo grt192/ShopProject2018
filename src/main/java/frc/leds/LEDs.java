@@ -7,6 +7,7 @@
 
 package frc.leds;
 
+import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.SerialPort.Port;
 import frc.drivetrain.Tank;
@@ -15,15 +16,27 @@ import frc.mechs.MechCollection;
 public class LEDs {
   private Tank tank;
   private MechCollection mechs;
+  private PowerDistributionPanel pdp;
 
-  public LEDs(Tank tank, MechCollection mechs) {
+  private SerialPort arduino;
+
+  public LEDs(SerialPort arduino, Tank tank, MechCollection mechs, PowerDistributionPanel pdp) {
     this.tank = tank;
     this.mechs = mechs;
+    this.pdp = pdp;
+
+    this.arduino = arduino;
   }
 
-  private SerialPort arduinoPort = new SerialPort(9600, Port.kUSB);
-
   public void sayHi() {
-    arduinoPort.writeString("hi");
+    arduino.writeString("hi");
+  }
+
+  public void sendData() {
+
+  }
+
+  public void sendVoltage() {
+    arduino.writeString(pdp.getVoltage() + "");
   }
 }
