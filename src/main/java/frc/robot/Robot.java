@@ -65,5 +65,9 @@ public class Robot extends IterativeRobot {
     public void disabledInit() {
         auto.disable();
     }
+<<<<<<< HEAD
 
 }
+=======
+}
+>>>>>>> origin/autonumous-framework
