@@ -68,7 +68,6 @@ public class Autonomous implements Runnable {
 	}
 
 	public void periodic() {
-
 	}
 
 }
