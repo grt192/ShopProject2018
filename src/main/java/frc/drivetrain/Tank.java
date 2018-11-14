@@ -67,29 +67,6 @@ public class Tank {
         set(lSpeed, rSpeed);
     }
 
-    public void stop() {
-        set(0, 0);
-    }
-
-    public void setLinear(double speed) {
-        set(speed, speed);
-
-    }
-
-    public void setPolarGradient(double startspeed, double distance) throws InterruptedException {
-
-        while (getTankData().gyroAngle < distance) {
-            setPolar(0, startspeed);
-            while (getTankData().gyroAngle < distance * 2 / 3) {
-                Thread.sleep(50);
-            }
-            setPolar(0, startspeed / 4);
-            while (getTankData().gyroAngle < distance / 3) {
-                Thread.sleep(50);
-            }
-        }
-    }
-
     private void configPID(TalonSRX talon) {
         talon.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
         double kF = 1023 * 10 * TICKS_TO_METERS / MAX_SPEED;
