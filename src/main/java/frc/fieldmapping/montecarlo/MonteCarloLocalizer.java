@@ -9,7 +9,7 @@ import frc.robot.GRTUtil;
 public class MonteCarloLocalizer extends Thread {
 
     private static final double GYRO_STDDEV = 0.01;
-    private static final double WHEEL_NOISE = 0.05 * 0;
+    private static final double WHEEL_NOISE = 0.05;
 
     private static final long TIME_STEP = 20;
     private static final double dT = TIME_STEP / 1000.0;
@@ -53,15 +53,17 @@ public class MonteCarloLocalizer extends Thread {
     private void updateAverage() {
         double x = 0;
         double y = 0;
-        double theta = 0;
+        double unitX = 0;
+        double unitY = 0;
         for (int i = 0; i < states.length; i++) {
             x += states[i].x;
             y += states[i].y;
-            theta += GRTUtil.positiveMod(states[i].angle, GRTUtil.TWO_PI);
+            unitX += Math.cos(states[i].angle);
+            unitY += Math.sin(states[i].angle);
         }
         averageState.x = x / states.length;
         averageState.y = y / states.length;
-        averageState.angle = theta / states.length;
+        averageState.angle = Math.atan2(unitY, unitX);
     }
 
     private void updateState(MCState state, TankData data) {
@@ -73,9 +75,7 @@ public class MonteCarloLocalizer extends Thread {
     }
 
     private double getWeight(MCState state, TankData data) {
-        double gyroAngle = GRTUtil.positiveMod(data.gyroAngle, GRTUtil.TWO_PI);
-        double angle = GRTUtil.positiveMod(state.angle, GRTUtil.TWO_PI);
-        return GRTUtil.normPDF(angle, gyroAngle, GYRO_STDDEV);
+        return GRTUtil.normPDF(GRTUtil.distanceBetweenAngles(state.angle, data.gyroAngle), 0, GYRO_STDDEV);
     }
 
     public double getX() {

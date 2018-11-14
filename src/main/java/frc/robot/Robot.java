@@ -67,7 +67,7 @@ public class Robot extends IterativeRobot {
         tank.set(l, r);
         SmartDashboard.putNumber("Basic X", tracker.getX());
         SmartDashboard.putNumber("Basic Y", tracker.getY());
-        SmartDashboard.putNumber("Gyro Angle", tank.getTankData().gyroAngle);
+        SmartDashboard.putNumber("Gyro Angle", GRTUtil.modAngle(tank.getTankData().gyroAngle));
         SmartDashboard.putNumber("MCL X", mcl.getX());
         SmartDashboard.putNumber("MCL Y", mcl.getY());
         SmartDashboard.putNumber("MCL Angle", mcl.getAngle());

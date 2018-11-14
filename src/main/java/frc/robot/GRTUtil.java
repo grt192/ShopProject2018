@@ -16,6 +16,23 @@ public class GRTUtil {
 		return (((x % mod) + mod) % mod);
 	}
 
+	public static double modAngle(double x) {
+		return positiveMod(x, TWO_PI);
+	}
+
+	public static double distanceBetweenAngles(double a1, double a2) {
+		a1 = modAngle(a1);
+		a2 = modAngle(a2);
+		double d = a1 - a2;
+		if (d > Math.PI) {
+			d -= TWO_PI;
+		}
+		if (d < -Math.PI) {
+			d += TWO_PI;
+		}
+		return d;
+	}
+
 	public static boolean inRange(double min, double x, double max) {
 		return x >= min && x <= max;
 	}
