@@ -13,6 +13,7 @@ import frc.mechs.MechCollection;
 import frc.drivetrain.Tank;
 import frc.fieldmapping.EncoderPositionTracker;
 import frc.fieldmapping.FieldMappingThread;
+import frc.mechs.MechCollection;
 
 public class Robot extends IterativeRobot {
 
@@ -33,7 +34,7 @@ public class Robot extends IterativeRobot {
         fieldMappingThread = new FieldMappingThread(tank);
         fieldMappingThread.start();
         tracker = fieldMappingThread.getTracker();
-        // auto = new Autonomous(mechCollection, tank, tracker);
+        auto = new Autonomous(mechCollection, tank, tracker);
         teleop = new Teleop(mechCollection, tank);
     }
 
@@ -65,4 +66,5 @@ public class Robot extends IterativeRobot {
     public void disabledInit() {
         auto.disable();
     }
+
 }

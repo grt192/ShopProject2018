@@ -2,12 +2,10 @@ package frc.robot;
 
 import frc.config.Config;
 import frc.drivetrain.Tank;
-import frc.drivetrain.TankData;
 import frc.fieldmapping.EncoderPositionTracker;
 import frc.mechs.Arm;
-import frc.mechs.SensorToAngle;
+import frc.mechs.Intake;
 import frc.mechs.MechCollection;
-import frc.mechs.Intake;;
 
 public class Autonomous implements Runnable {
 
