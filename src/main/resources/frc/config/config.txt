@@ -24,7 +24,7 @@ right_inverted=true
 right_master=2
 right_follower=1
 
-(360 / ticksPerR) * 180
 lowestPos =
 oneeighty =
-twotwentyfive = 
+twotwentyfive =
+oppositeLow =
