@@ -1,6 +1,5 @@
 package frc.robot;
 
-import frc.config.Config;
 import frc.drivetrain.Tank;
 import frc.fieldmapping.EncoderPositionTracker;
 import frc.mechs.Arm;
@@ -41,13 +40,13 @@ public class Autonomous implements Runnable {
 			Thread.sleep(50);
 		}
 		tank.setPolar(0, 0);
-		// arm.lower();
+		arm.setArmPosition(Arm.lowest);
 		Thread.sleep(1000);
 		intake.pickOpen();
 		Thread.sleep(1000);
 		intake.pickClose();
 		Thread.sleep(1000);
-		// arm.raise();
+		arm.setArmPosition(Arm.oneeighty);
 		Thread.sleep(1000);
 		tank.setPolar(0, -Math.PI / 2);
 		System.out.print("Turning\n");
@@ -61,7 +60,7 @@ public class Autonomous implements Runnable {
 		}
 		tank.set(0, 0);
 		Thread.sleep(1000);
-		// arm.flip();
+		arm.setArmPosition(Arm.twotwentyfive);
 		Thread.sleep(1000);
 		intake.pickOpen();
 	}
