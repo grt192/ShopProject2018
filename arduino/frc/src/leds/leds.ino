@@ -18,6 +18,7 @@ double voltage;
 void setup()
 {
     Serial.begin(9600);
+    //Serial.setTimeout(2000);
     Serial.write("hello");
 
     pinMode(13, OUTPUT);
@@ -32,46 +33,40 @@ void loop()
     // put your main code here, to run repeatedly:
     if (Serial.available())
     {
-        digitalWrite(13, HIGH);
-        voltage = Serial.readString().toDouble();//String.toDouble(Serial.readString());
+        unsigned long startTime = micros();
+        
+        double voltage = Serial.readStringUntil('\n').toDouble();
+                
+        double red = voltageToColor(0, voltage);
+        double green = voltageToColor(1, voltage);
 
-        double red = voltageToColor("red", voltage);
-        double green = voltageToColor("green", voltage);
+        //Serial.println(red);
+        //Serial.println(green);
 
-        Serial.println(red);
-        Serial.println(green);
+        digitalWrite(13, LOW);
 
         for (int i = 0; i < STRIPLEN; i++)
         {
-            strip.setPixelColor(i, red, green, 0);
-            strip.show();
+            strip.setPixelColor(i, red, green, 0);          
         }
-    }else {
-      digitalWrite(13, LOW);
+
+        strip.show();
+        Serial.println((micros() - startTime));
     }
 }
 
-double voltageToColor(String color, double voltage)
+double voltageToColor(int color, double voltage)
 {
-    double scale = clip((voltage - 7.0)/6.0);
-
-    //Scale using hsl (Hue saturation brightness) 0-120 100% 50% pattern
-    double redValue = clip( (255.0 - (255.0 * 2 * (scale - 0.5))), 0.0, 255.0);
-    double greenValue = clip( (255.0 * 2.0 * scale), 0.0, 255.0 );
-    
-
-    if (color == "red")
-    {
-        return redValue;
-    }
-    else if (color == "green")
-    {
-        return greenValue;
-    }
-    else
-    {
-        return 0.0;
-    }
+  double scale = clip((voltage - 7.0)/6.0);
+  
+  if(color == 0){
+    //red
+    return clip( (255.0 - (255.0 * 2 * (scale - 0.5))), 0.0, 255.0);
+  }else if(color == 1){
+    return clip( (255.0 * 2.0 * scale), 0.0, 255.0 );
+  }else{
+    return 0;
+  }
 }
 
 double clip(double input){
