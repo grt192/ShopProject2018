@@ -24,3 +24,7 @@ right_inverted=true
 right_master=2
 right_follower=1
 
+lowestPos =
+oneeighty =
+twotwentyfive =
+oppositeLow =

@@ -9,12 +9,11 @@ import frc.config.Config;
 public class Arm {
 
     private TalonSRX armMotor;
-    private static final int ticksPerR = 36;
-
-    public static final int lowest = 0;
-    // not sure if this is how you do this //
-    public static final int oneeighty = (360 / ticksPerR) * 180;
-    public static final int twotwentyfive = (360 / ticksPerR) * 225;
+    public static final int ticksPerR = 36;
+    public static final int lowest = Config.getInt("lowestPos");
+    public static final int oneeighty = Config.getInt("oneeighty");
+    public static final int twotwentyfive = Config.getInt("twotwentyfive");
+    public static final int oppositeLow = Config.getInt("oppositeLow");
 
     public Arm(XboxController controller) {
         armMotor = new TalonSRX(Config.getInt("armmotor"));
