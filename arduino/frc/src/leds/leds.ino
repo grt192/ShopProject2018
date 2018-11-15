@@ -20,6 +20,8 @@ void setup()
     Serial.begin(9600);
     Serial.write("hello");
 
+    pinMode(13, OUTPUT);
+
     strip.begin();
     strip.clear();
     strip.show();
@@ -30,6 +32,7 @@ void loop()
     // put your main code here, to run repeatedly:
     if (Serial.available())
     {
+        digitalWrite(13, HIGH);
         voltage = Serial.readString().toDouble();//String.toDouble(Serial.readString());
 
         double red = voltageToColor("red", voltage);
@@ -43,6 +46,8 @@ void loop()
             strip.setPixelColor(i, red, green, 0);
             strip.show();
         }
+    }else {
+      digitalWrite(13, LOW);
     }
 }
 

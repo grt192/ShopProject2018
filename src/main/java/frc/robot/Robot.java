@@ -8,6 +8,7 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.Notifier;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import frc.config.Config;
 import frc.drivetrain.Tank;
@@ -41,6 +42,8 @@ public class Robot extends IterativeRobot {
         teleop = new Teleop(mechCollection, tank);
 
         arduino = new LEDs(tank, mechCollection, new PowerDistributionPanel());
+
+        new Notifier(arduino).startPeriodic(0.25);
     }
 
     @Override
@@ -72,10 +75,4 @@ public class Robot extends IterativeRobot {
     public void disabledInit() {
         auto.disable();
     }
-
-    @Override
-    public void robotPeriodic() {
-        arduino.sendVoltage();
-    }
-
 }

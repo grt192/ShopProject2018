@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj.SerialPort.Port;
 import frc.drivetrain.Tank;
 import frc.mechs.MechCollection;
 
-public class LEDs {
+public class LEDs implements Runnable {
   private Tank tank;
   private MechCollection mechs;
   private PowerDistributionPanel pdp;
@@ -32,11 +32,12 @@ public class LEDs {
     arduino.writeString("hi");
   }
 
-  public void sendData() {
-
+  public void run() {
+    sendVoltage();
   }
 
   public void sendVoltage() {
+    System.out.println("Voltage: " + pdp.getVoltage());
     arduino.writeString(pdp.getVoltage() + "");
   }
 }
