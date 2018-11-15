@@ -38,6 +38,6 @@ public class LEDs implements Runnable {
 
   public void sendVoltage() {
     System.out.println("Voltage: " + pdp.getVoltage());
-    arduino.writeString(pdp.getVoltage() + "");
+    arduino.writeString(pdp.getVoltage() + "\n");
   }
 }
