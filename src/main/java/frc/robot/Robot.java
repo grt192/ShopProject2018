@@ -8,11 +8,13 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import frc.config.Config;
-import frc.mechs.MechCollection;
 import frc.drivetrain.Tank;
 import frc.fieldmapping.EncoderPositionTracker;
 import frc.fieldmapping.FieldMappingThread;
+import frc.leds.LEDs;
+import frc.mechs.MechCollection;
 
 public class Robot extends IterativeRobot {
 
@@ -23,6 +25,8 @@ public class Robot extends IterativeRobot {
     private FieldMappingThread fieldMappingThread;
     private EncoderPositionTracker tracker;
     private MechCollection mechCollection;
+
+    private LEDs arduino;
 
     @Override
     public void robotInit() {
@@ -35,6 +39,8 @@ public class Robot extends IterativeRobot {
         tracker = fieldMappingThread.getTracker();
         auto = new Autonomous(mechCollection, tank, tracker);
         teleop = new Teleop(mechCollection, tank);
+
+        arduino = new LEDs(tank, mechCollection, new PowerDistributionPanel());
     }
 
     @Override
@@ -59,11 +65,17 @@ public class Robot extends IterativeRobot {
 
     @Override
     public void testPeriodic() {
+
     }
 
     @Override
     public void disabledInit() {
         auto.disable();
+    }
+
+    @Override
+    public void robotPeriodic() {
+        arduino.sendVoltage();
     }
 
 }

@@ -18,14 +18,17 @@ public class ArduinoTest {
 
 	private SerialPort arduino;
 
-	public void init() {
+	public ArduinoTest() {
 		arduino = new SerialPort(9600, Port.kUSB);
-		leds = new LEDs(arduino, tank, mechs, pdp);
+		leds = new LEDs(tank, mechs, pdp);
 
 		tank = new Tank();
 		mechs = new MechCollection();
 
 		pdp = new PowerDistributionPanel();
+	}
+
+	public void init() {
 
 		leds.sayHi();
 	}

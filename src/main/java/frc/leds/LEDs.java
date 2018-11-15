@@ -20,12 +20,12 @@ public class LEDs {
 
   private SerialPort arduino;
 
-  public LEDs(SerialPort arduino, Tank tank, MechCollection mechs, PowerDistributionPanel pdp) {
+  public LEDs(Tank tank, MechCollection mechs, PowerDistributionPanel pdp) {
     this.tank = tank;
     this.mechs = mechs;
     this.pdp = pdp;
 
-    this.arduino = arduino;
+    arduino = new SerialPort(9600, Port.kUSB);
   }
 
   public void sayHi() {
