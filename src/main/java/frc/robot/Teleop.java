@@ -39,20 +39,17 @@ public class Teleop {
 
 		}
 
-		/*
-		 * if (xboxMechs.getPOV() == 0) { mechs.arm.raise(); } else if
-		 * (xboxMechs.getPOV() == 2) { mechs.arm.flip(); } else if (xboxMechs.getPOV()
-		 * == 4) { mechs.arm.lower(); }
-		 * 
-		 * // mechs.pickup.setPickupPivotPower((-0.5) * //
-		 * JoystickProfile.applyDeadband(xboxDrive.getY(Hand.kLeft)));
-		 * 
-		 * // mechs.elevator.setElevatorPower((-0.5) * //
-		 * JoystickProfile.applyDeadband(xboxMechs.getY(Hand.kRight)));
-		 * 
-		 * if (xboxMechs.getXButton()) { mechs.arm.lower(); } else if
-		 * (xboxMechs.getYButton()) { mechs.arm.raise(); }
-		 */
+		if (xboxMechs.getBumperPressed(Hand.kLeft)) {
+			mechs.arm.setArmPosition(Arm.oppositeLow);
+		}
+		if (xboxMechs.getBumperPressed(Hand.kRight)) {
+			mechs.arm.setArmPosition(Arm.lowest);
+		}
+		// mechs.pickup.setPickupPivotPower((-0.5);
+		// JoystickProfile.applyDeadband(xboxDrive.getY(Hand.kLeft)));
+
+		// mechs.elevator.setElevatorPower((-0.5);
+		// JoystickProfile.applyDeadband(xboxMechs.getY(Hand.kRight)));
 
 	}
 }
