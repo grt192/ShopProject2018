@@ -14,6 +14,8 @@ public class Elevator {
     public static final int MIDDLE = 5000;
     public static final int BOTTOM = 0;
 
+    public boolean modePosition = false;
+
     public Elevator() {
         winchLeft = new TalonSRX(Config.getInt("winch_left"));
         winchRight = new TalonSRX(Config.getInt("winch_right"));
@@ -29,11 +31,13 @@ public class Elevator {
     }
 
     public void setElevatorPosition(int position) {
+        modePosition = true;
         winchLeft.set(ControlMode.Position, position);
     }
 
     public void setElevatorPower(double power) {
         // Remeber to mess with direction
+        modePosition = false;
         winchLeft.set(ControlMode.PercentOutput, power);
     }
 }

@@ -15,6 +15,8 @@ public class Pickup {
     public static final int armDown = 10000;
     public static final int armUp = 5000;
 
+    public boolean modePosition;
+
     public Pickup() {
         pickupPneumatic = new Solenoid(Config.getInt("pickup_pneumatic"));
 
@@ -34,10 +36,12 @@ public class Pickup {
 
     public void setPickupPivotPosition(int position) {
         // to implement
+        modePosition = true;
         pickupPivot.set(ControlMode.Position, position);
     }
 
     public void setPickupPivotPower(double power) {
+        modePosition = false;
         pickupPivot.set(ControlMode.PercentOutput, power);
     }
 }
