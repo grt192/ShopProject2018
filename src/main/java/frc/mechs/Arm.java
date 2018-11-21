@@ -15,6 +15,8 @@ public class Arm {
     public static final int twotwentyfive = Config.getInt("twotwentyfive");
     public static final int oppositeLow = Config.getInt("oppositeLow");
 
+    public boolean modePosition;
+
     public Arm(XboxController controller) {
         armMotor = new TalonSRX(Config.getInt("armmotor"));
 
@@ -27,10 +29,14 @@ public class Arm {
     }
 
     public void setArmPower(double power) {
+
+        modePosition = false;
         armMotor.set(ControlMode.PercentOutput, power);
     }
 
     public void setArmPosition(int position) {
+
+        modePosition = true;
         armMotor.set(ControlMode.Position, position);
 
     }

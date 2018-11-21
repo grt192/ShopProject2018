@@ -5,7 +5,6 @@ import edu.wpi.first.wpilibj.GenericHID.Hand;
 import frc.drivetrain.Tank;
 import frc.mechs.Arm;
 import frc.mechs.MechCollection;
-import frc.mechs.Intake;
 
 public class Teleop {
 
@@ -45,11 +44,6 @@ public class Teleop {
 		if (xboxMechs.getBumperPressed(Hand.kRight)) {
 			mechs.arm.setArmPosition(Arm.lowest);
 		}
-		// mechs.pickup.setPickupPivotPower((-0.5);
-		// JoystickProfile.applyDeadband(xboxDrive.getY(Hand.kLeft)));
-
-		// mechs.elevator.setElevatorPower((-0.5);
-		// JoystickProfile.applyDeadband(xboxMechs.getY(Hand.kRight)));
 
 	}
 }

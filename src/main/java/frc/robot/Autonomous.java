@@ -52,11 +52,11 @@ public class Autonomous implements Runnable {
 
 		// planning on driving backwards //
 		while (tank.getTankData().gyroAngle < Math.PI / 2) {
-			tank.setPolar(0, 1); // go back later to change angular velocity, should be positive//
+			tank.setPolar(0, -(-Math.PI - 2 * tank.getTankData().gyroAngle - 0.2));
 			Thread.sleep(10);
 		}
 
-		tank.setPolar(-4.5 / 4, 0);
+		// tank.setPolar(-4.5 / 4, 0);
 
 		while (tracker.getY() > -2) { // -4.5
 			Thread.sleep(50);
