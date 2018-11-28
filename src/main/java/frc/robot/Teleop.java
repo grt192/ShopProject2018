@@ -1,8 +1,9 @@
 package frc.robot;
 
-import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
+import edu.wpi.first.wpilibj.XboxController;
 import frc.drivetrain.Tank;
+import frc.leds.LEDs;
 import frc.mechs.Elevator;
 import frc.mechs.MechCollection;
 import frc.mechs.Pickup;
@@ -15,12 +16,19 @@ public class Teleop {
 	private MechCollection mechs;
 	private Tank drive;
 
+	private LEDs arduino;
+
+	private Double leftPower;
+	private Double rightPower;
+
 	public Teleop(MechCollection mechs, Tank drive) {
 		this.mechs = mechs;
 		this.drive = drive;
 
 		xboxMechs = new XboxController(0);
 		xboxDrive = new XboxController(1);
+
+		arduino = new LEDs();
 	}
 
 	public void init() {
@@ -28,8 +36,16 @@ public class Teleop {
 	}
 
 	public void periodic() {
-		drive.set((-2.0) * JoystickProfile.applyDeadband(xboxDrive.getY(Hand.kLeft)),
-				(-2.0) * JoystickProfile.applyDeadband(xboxDrive.getY(Hand.kRight)));
+		leftPower = (-2.0) * JoystickProfile.applyDeadband(xboxDrive.getY(Hand.kLeft));
+		rightPower = (-2.0) * JoystickProfile.applyDeadband(xboxDrive.getY(Hand.kRight));
+
+		drive.set(leftPower, rightPower);
+
+		try {
+			arduino.sendTank(leftPower, rightPower);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 
 		if (xboxMechs.getAButton()) {
 			mechs.pickup.setPickup(true);

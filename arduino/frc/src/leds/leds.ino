@@ -15,6 +15,21 @@ Adafruit_NeoPixel strip = Adafruit_NeoPixel(13, PIN, NEO_GRB + NEO_KHZ400);
 
 double voltage;
 
+String message;
+char key;
+String value;
+
+int voltageRangeMin = 0;
+int voltageRangeMax = 5;
+
+int leftRangeMin = voltageRangeMax;
+int leftRangeMax = 10;
+int leftSize = leftRangeMax-leftRangeMin;
+
+int rightRangeMin = leftRangeMax;
+int rightRangeMax = 15;
+int rightSize = rightRangeMax-rightRangeMin;
+
 void setup()
 {
     Serial.begin(9600);
@@ -35,24 +50,42 @@ void loop()
     {
         unsigned long startTime = micros();
         
-        double voltage = Serial.readStringUntil('\n').toDouble();
-                
-        double red = voltageToColor(0, voltage);
-        double green = voltageToColor(1, voltage);
+        message = Serial.readStringUntil('\n');
 
-        //Serial.println(red);
-        //Serial.println(green);
+        key = message.charAt(0);
 
-        digitalWrite(13, LOW);
+        value = message.substring(1);
 
-        for (int i = 0; i < STRIPLEN; i++)
-        {
-            strip.setPixelColor(i, red, green, 0);          
+        switch(key){
+          case 'v':
+            voltageSetStrip(value.toDouble());
+          default:
+            break;
         }
-
-        strip.show();
+        
         Serial.println((micros() - startTime));
     }
+}
+
+void leftSetStrip(double power){
+  
+}
+
+void voltageSetStrip(double value){
+  double red = voltageToColor(0, voltage);
+  double green = voltageToColor(1, voltage);
+
+  //Serial.println(red);
+  //Serial.println(green);
+
+  digitalWrite(13, LOW);
+
+  for (int i = voltageRangeMin; i < voltageRangeMax; i++)
+  {
+      strip.setPixelColor(i, red, green, 0);          
+  }
+
+  strip.show();
 }
 
 double voltageToColor(int color, double voltage)

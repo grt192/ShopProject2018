@@ -11,33 +11,43 @@ import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.SerialPort.Port;
 import frc.drivetrain.Tank;
+import frc.drivetrain.TankData;
 import frc.mechs.MechCollection;
 
-public class LEDs implements Runnable {
+public class LEDs {
   private Tank tank;
   private MechCollection mechs;
   private PowerDistributionPanel pdp;
 
   private SerialPort arduino;
 
-  public LEDs(Tank tank, MechCollection mechs, PowerDistributionPanel pdp) {
-    this.tank = tank;
-    this.mechs = mechs;
-    this.pdp = pdp;
+  public LEDs() {
+    try {
+      arduino = new SerialPort(9600, Port.kUSB);
+    } catch (Exception e) {
+      // TODO: handle exception
+    }
 
-    arduino = new SerialPort(9600, Port.kUSB);
   }
 
   public void sayHi() {
     arduino.writeString("hi");
   }
 
-  public void run() {
-    sendVoltage();
+  public void sendVoltage(Double voltage) {
+    System.out.println("Voltage: " + voltage);
+
+    if (arduino != null)
+      arduino.writeString("v" + voltage + "\n");
+
   }
 
-  public void sendVoltage() {
-    System.out.println("Voltage: " + pdp.getVoltage());
-    arduino.writeString(pdp.getVoltage() + "\n");
+  public void sendTank(Double left, Double right) {
+    System.out.println("Motor Power: " + left + ", " + right);
+
+    if (arduino != null) {
+      arduino.writeString("l" + left + "\n");
+      arduino.writeString("r" + right + "\n");
+    }
   }
 }

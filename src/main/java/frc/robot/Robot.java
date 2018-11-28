@@ -23,9 +23,12 @@ public class Robot extends IterativeRobot {
     private Teleop teleop;
 
     private Tank tank;
+    private MechCollection mechCollection;
+
+    private PowerDistributionPanel pdp;
+
     private FieldMappingThread fieldMappingThread;
     private EncoderPositionTracker tracker;
-    private MechCollection mechCollection;
 
     private LEDs arduino;
 
@@ -35,15 +38,23 @@ public class Robot extends IterativeRobot {
 
         mechCollection = new MechCollection();
         tank = new Tank();
+
         fieldMappingThread = new FieldMappingThread(tank);
         fieldMappingThread.start();
+
         tracker = fieldMappingThread.getTracker();
+
         auto = new Autonomous(mechCollection, tank, tracker);
         teleop = new Teleop(mechCollection, tank);
 
-        arduino = new LEDs(tank, mechCollection, new PowerDistributionPanel());
+        pdp = new PowerDistributionPanel();
 
-        new Notifier(arduino).startPeriodic(0.25);
+        arduino = new LEDs();
+    }
+
+    @Override
+    public void robotPeriodic() {
+
     }
 
     @Override
