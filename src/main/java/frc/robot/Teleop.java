@@ -14,6 +14,7 @@ public class Teleop {
 	private MechCollection mechs;
 	private Tank drive;
 
+
 	public Teleop(MechCollection mechs, Tank drive) {
 		this.mechs = mechs;
 		this.drive = drive;
@@ -27,8 +28,18 @@ public class Teleop {
 	}
 
 	public void periodic() {
-		drive.set((-2.0) * JoystickProfile.applyDeadband(xboxDrive.getY(Hand.kLeft)),
-				(-2.0) * JoystickProfile.applyDeadband(xboxDrive.getY(Hand.kRight)));
+
+		if (xboxDrive.getXButton()) {
+			// arcade //
+			// is the getX value an angle? //
+			drive.setPolar((-2.0) * JoystickProfile.applyDeadband(xboxDrive.getY(Hand.kLeft)), ((-2.0) * JoystickProfile.applyDeadband(xboxDrive.getX(Hand.kLeft))));
+		} else if (xboxDrive.getYButton()) {
+			// tank //
+			drive.set((-2.0) * JoystickProfile.applyDeadband(xboxDrive.getY(Hand.kLeft)), (-2.0) * JoystickProfile.applyDeadband(xboxDrive.getY(Hand.kRight)));
+		} else {
+			// default to tank //
+			drive.set((-2.0) * JoystickProfile.applyDeadband(xboxDrive.getY(Hand.kLeft)), (-2.0) * JoystickProfile.applyDeadband(xboxDrive.getY(Hand.kRight)));
+		}
 
 		if (xboxMechs.getAButton()) {
 			mechs.intake.pickOpen();
