@@ -22,13 +22,15 @@ String value;
 int voltageRangeMin = 0;
 int voltageRangeMax = 5;
 
-int leftRangeMin = voltageRangeMax;
-int leftRangeMax = 10;
-int leftSize = leftRangeMax-leftRangeMin;
+int leftSize = 11;
+int leftMin = voltageRangeMax;
+int leftRangeMax = voltageRangeMax + leftSize;
+int leftMiddle = leftMin + leftSize/2;
 
-int rightRangeMin = leftRangeMax;
-int rightRangeMax = 15;
-int rightSize = rightRangeMax-rightRangeMin;
+int rightSize = 11;
+int rightMin = leftRangeMax;
+int rightRangeMax = leftRangeMax + rightSize;
+int rightMiddle = rightMin + rightSize/2;
 
 void setup()
 {
@@ -67,8 +69,40 @@ void loop()
     }
 }
 
-void leftSetStrip(double power){
+void rightSetStrip(double power){
+  for(int i = rightMin; i < rightRangeMax; i++){
+    strip.setPixelColor(i, 0, 0, 0);
+  }
   
+  if(power > 0){
+    for(int i = rightMiddle; i < rightRangeMax; i++){
+      strip.setPixelColor(i, 255, 0, 0);
+    }
+  }else if(power < 0){
+    for(int i = rightMin; i <= rightMiddle; i++){
+      strip.setPixelColor(i, 255, 0, 0);
+    }
+  }
+
+  strip.show();  
+}
+
+void leftSetStrip(double power){
+  for(int i = leftMin; i < leftRangeMax; i++){
+    strip.setPixelColor(i, 0, 0, 0);
+  }
+  
+  if(power > 0){
+    for(int i = leftMiddle; i < leftRangeMax; i++){
+      strip.setPixelColor(i, 255, 0, 0);
+    }
+  }else if(power < 0){
+    for(int i = leftMin; i <=leftMiddle; i++){
+      strip.setPixelColor(i, 255, 0, 0);
+    }
+  }
+
+  strip.show();  
 }
 
 void voltageSetStrip(double value){
