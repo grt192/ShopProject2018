@@ -9,17 +9,23 @@ public class Elevator {
 
     private TalonSRX winchLeft;
     private TalonSRX winchRight;
+    private TalonSRX tray;
 
     public static final int TOP = 10000;
     public static final int MIDDLE = 5000;
     public static final int BOTTOM = 0;
 
+<<<<<<< HEAD
     public boolean modePosition = false;
+=======
+    public static final int UP = 1;
+    public static final int DOWN = 0;
+>>>>>>> f-period
 
     public Elevator() {
         winchLeft = new TalonSRX(Config.getInt("winch_left"));
         winchRight = new TalonSRX(Config.getInt("winch_right"));
-
+        tray = new TalonSRX(Config.getInt("tray"));
         winchLeft.config_kP(0, 1, 0);
         winchLeft.config_kI(0, 0, 0);
         winchLeft.config_kD(0, 0, 0);
@@ -33,6 +39,11 @@ public class Elevator {
     public void setElevatorPosition(int position) {
         modePosition = true;
         winchLeft.set(ControlMode.Position, position);
+    }
+
+    public void setTrayPosition(int position) {
+        tray.set(ControlMode.Position, position);
+
     }
 
     public void setElevatorPower(double power) {

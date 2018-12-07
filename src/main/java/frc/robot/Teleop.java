@@ -12,7 +12,7 @@ public class Teleop {
 	private XboxController xboxMechs;
 	private XboxController xboxDrive;
 
-	MechCollection mechs;
+	private MechCollection mechs;
 	private Tank drive;
 
 	private Double mechsLeftJoystick;

@@ -9,33 +9,32 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import frc.config.Config;
+import frc.mechs.MechCollection;
 import frc.drivetrain.Tank;
 import frc.fieldmapping.EncoderPositionTracker;
 import frc.fieldmapping.FieldMappingThread;
-import frc.mechs.MechCollection;
 
 public class Robot extends IterativeRobot {
 
     private Autonomous auto;
     private Teleop teleop;
 
-    private MechCollection mechs;
     private Tank tank;
     private FieldMappingThread fieldMappingThread;
     private EncoderPositionTracker tracker;
+    private MechCollection mechCollection;
 
     @Override
     public void robotInit() {
         Config.start();
 
-        mechs = new MechCollection();
-
+        mechCollection = new MechCollection();
         tank = new Tank();
         fieldMappingThread = new FieldMappingThread(tank);
         fieldMappingThread.start();
         tracker = fieldMappingThread.getTracker();
-        auto = new Autonomous();
-        teleop = new Teleop(mechs, tank);
+        auto = new Autonomous(mechCollection, tank, tracker);
+        teleop = new Teleop(mechCollection, tank);
     }
 
     @Override
@@ -61,4 +60,10 @@ public class Robot extends IterativeRobot {
     @Override
     public void testPeriodic() {
     }
+
+    @Override
+    public void disabledInit() {
+        auto.disable();
+    }
+
 }
