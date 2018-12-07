@@ -8,27 +8,27 @@ import frc.config.Config;
 
 public class Arm {
 
-    private TalonSRX armMotor;
+    private TalonSRX armMotor1;
 
     public Arm(XboxController controller) {
-        armMotor = new TalonSRX(Config.getInt("armmotor"));
+        armMotor1 = new TalonSRX(Config.getInt("armmotor1"));
 
         int ticksPerR = 36;
 
-        armMotor.config_kP(0, 1, 0);
-        armMotor.config_kI(0, 0, 0);
-        armMotor.config_kD(0, 0, 0);
+        armMotor1.config_kP(0, 1, 0);
+        armMotor1.config_kI(0, 0, 0);
+        armMotor1.config_kD(0, 0, 0);
 
-        armMotor.config_kF(0, 0, 0);
+        armMotor1.config_kF(0, 0, 0);
 
     }
 
     public void setArmPower(double power) {
-        armMotor.set(ControlMode.PercentOutput, power);
+        armMotor1.set(ControlMode.PercentOutput, power);
     }
 
     public void setArmPosition(int position) {
-        armMotor.set(ControlMode.Position, position);
+        armMotor1.set(ControlMode.Position, position);
 
     }
 

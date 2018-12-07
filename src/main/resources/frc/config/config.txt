@@ -2,12 +2,8 @@
 
 sol =
 
-arm_motor1 =
-arm_motor2 =
-arm_motor3 =
-
-leftMotor =
-rightMotor =
+armmotor_master = 3
+armmotor_follower = 4
 
 encLeft = 
 encRight =
@@ -17,11 +13,11 @@ ticks_to_meters=0.0005588
 max_speed=3.5
 
 left_inverted=false
-left_master=15
-left_follower=16
+left_master=1
+left_follower=2
 right_inverted=true
-right_master=2
-right_follower=1
+right_master=16
+right_follower=15
 
 lowestPos =
 twotwentyfive =
