@@ -35,7 +35,7 @@ public class Teleop {
 		double radians = joyDrive.getDirectionRadians();
 		double magnitude = joyDrive.getMagnitude();
 		
-		drive.setPolar((-2.0) * JoystickProfile.applyDeadband(magnitude), ((-2.0) * JoystickProfile.applyDeadband(radians)));
+		drive.setPolar((-2.0) * JoystickProfile.applyDeadband(joyDrive.getY(Hand.kLeft)), ((-2.0) * JoystickProfile.applyDeadband(radians)));
 
 		if (xboxMechs.getAButton()) {
 			mechs.intake.pickOpen();
