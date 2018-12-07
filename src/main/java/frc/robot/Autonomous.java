@@ -1,6 +1,5 @@
 package frc.robot;
 
-import frc.config.Config;
 import frc.drivetrain.Tank;
 import frc.fieldmapping.EncoderPositionTracker;
 import frc.mechs.Arm;
@@ -9,7 +8,6 @@ import frc.mechs.MechCollection;
 
 public class Autonomous implements Runnable {
 
-	
 	private final Arm arm;
 	private final Tank tank;
 	private final Intake intake;
@@ -37,34 +35,41 @@ public class Autonomous implements Runnable {
 	}
 
 	public void runAutonomous() throws InterruptedException {
+		arm.setArmPosition(Arm.lowest);
+		Thread.sleep(1000);
+		intake.pickOpen();
+		Thread.sleep(1000);
 		tank.setPolar(2.7 / 4, 0);
+
 		while (tracker.getX() < 1) {
 			Thread.sleep(50);
 		}
+
 		tank.setPolar(0, 0);
-		// arm.lower();
-		Thread.sleep(1000);
-		intake.pickOpen();
 		Thread.sleep(1000);
 		intake.pickClose();
 		Thread.sleep(1000);
-		// arm.raise();
-		Thread.sleep(1000);
-		tank.setPolar(0, -Math.PI / 2);
-		System.out.print("Turning\n");
-		System.out.println(tank.getTankData().gyroAngle);
-		while (tank.getTankData().gyroAngle < -Math.PI / 2) {
+
+		// planning on driving backwards //
+		while (tank.getTankData().gyroAngle < Math.PI / 2) {
+			tank.setPolar(0, -(-Math.PI - 2 * tank.getTankData().gyroAngle - 0.2));
+			Thread.sleep(10);
+		}
+
+		// tank.setPolar(-4.5 / 4, 0);
+
+		while (tracker.getY() > -2) { // -4.5
 			Thread.sleep(50);
 		}
-		tank.setPolar(4.5 / 4, 0);
-		while (tracker.getY() < 2) {
-			Thread.sleep(50);
-		}
+
 		tank.set(0, 0);
-		Thread.sleep(1000);
-		// arm.flip();
+		arm.setArmPosition(Arm.twotwentyfive);
 		Thread.sleep(1000);
 		intake.pickOpen();
+		Thread.sleep(1000);
+		arm.setArmPosition(Arm.lowest);
+		Thread.sleep(1000);
+
 	}
 
 	public void disable() {
