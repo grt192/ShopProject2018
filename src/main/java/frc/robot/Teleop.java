@@ -4,6 +4,7 @@ import frc.config.Config;
 
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
+import edu.wpi.first.wpilibj.Joystick;
 import frc.drivetrain.Tank;
 import frc.mechs.Arm;
 import frc.mechs.MechCollection;
@@ -11,7 +12,7 @@ import frc.mechs.MechCollection;
 public class Teleop {
 
 	private XboxController xboxMechs;
-	private XboxController xboxDrive;
+	private Joystick joyDrive;
 
 	private MechCollection mechs;
 	private Tank drive;
@@ -22,7 +23,7 @@ public class Teleop {
 		this.drive = drive;
 
 		xboxMechs = new XboxController(0);
-		xboxDrive = new XboxController(1);
+		joyDrive = new Joystick(1);
 	}
 
 	public void init() {
@@ -31,17 +32,10 @@ public class Teleop {
 
 	public void periodic() {
 
-		if (xboxDrive.getXButton()) {
-			// arcade //
-			// is the getX value an angle? //
-			drive.setPolar((-2.0) * JoystickProfile.applyDeadband(xboxDrive.getY(Hand.kLeft)), ((-2.0) * JoystickProfile.applyDeadband(xboxDrive.getX(Hand.kLeft))));
-		} else if (xboxDrive.getYButton()) {
-			// tank //
-			drive.set((-2.0) * JoystickProfile.applyDeadband(xboxDrive.getY(Hand.kLeft)), (-2.0) * JoystickProfile.applyDeadband(xboxDrive.getY(Hand.kRight)));
-		} else {
-			// default to tank //
-			drive.set((-2.0) * JoystickProfile.applyDeadband(xboxDrive.getY(Hand.kLeft)), (-2.0) * JoystickProfile.applyDeadband(xboxDrive.getY(Hand.kRight)));
-		}
+		double radians = joyDrive.getDirectionRadians();
+		double magnitude = joyDrive.getMagnitude();
+		
+		drive.setPolar((-2.0) * JoystickProfile.applyDeadband(magnitude), ((-2.0) * JoystickProfile.applyDeadband(radians)));
 
 		if (xboxMechs.getAButton()) {
 			mechs.intake.pickOpen();
