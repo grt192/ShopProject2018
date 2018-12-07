@@ -1,7 +1,6 @@
 # Config file for shop project robots
 
-leftSol =
-rightSol =
+sol =
 
 arm_motor1 =
 arm_motor2 =
@@ -25,6 +24,5 @@ right_master=2
 right_follower=1
 
 lowestPos =
-oneeighty =
 twotwentyfive =
-oppositeLow =
+oppLow =

@@ -1,5 +1,7 @@
 package frc.robot;
 
+import frc.config.Config;
+
 import frc.drivetrain.Tank;
 import frc.fieldmapping.EncoderPositionTracker;
 import frc.mechs.Arm;
@@ -35,7 +37,7 @@ public class Autonomous implements Runnable {
 	}
 
 	public void runAutonomous() throws InterruptedException {
-		arm.setArmPosition(Arm.lowest);
+		arm.setArmPosition(Config.getInt("lowestPos"));
 		Thread.sleep(1000);
 		intake.pickOpen();
 		Thread.sleep(1000);
@@ -63,11 +65,11 @@ public class Autonomous implements Runnable {
 		}
 
 		tank.set(0, 0);
-		arm.setArmPosition(Arm.twotwentyfive);
+		arm.setArmPosition(Config.getInt("twotwentyfive"));
 		Thread.sleep(1000);
 		intake.pickOpen();
 		Thread.sleep(1000);
-		arm.setArmPosition(Arm.lowest);
+		arm.setArmPosition(Config.getInt("lowestPos"));
 		Thread.sleep(1000);
 
 	}

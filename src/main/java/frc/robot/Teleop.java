@@ -1,5 +1,7 @@
 package frc.robot;
 
+import frc.config.Config;
+
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import frc.drivetrain.Tank;
@@ -50,10 +52,10 @@ public class Teleop {
 		}
 
 		if (xboxMechs.getBumperPressed(Hand.kLeft)) {
-			mechs.arm.setArmPosition(Arm.oppositeLow);
+			mechs.arm.setArmPosition(Config.getInt("oppLow"));
 		}
 		if (xboxMechs.getBumperPressed(Hand.kRight)) {
-			mechs.arm.setArmPosition(Arm.lowest);
+			mechs.arm.setArmPosition(Config.getInt("lowestPos"));
 		}
 
 	}

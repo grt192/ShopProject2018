@@ -5,26 +5,23 @@ import frc.config.Config;
 
 public class Intake {
 
-    private Solenoid rightSol, leftSol;
+    private Solenoid sol;
 
     public Intake() {
 
-        leftSol = new Solenoid(Config.getInt("leftSol"));
-        rightSol = new Solenoid(Config.getInt("rightSol"));
+        sol = new Solenoid(Config.getInt("sol"));
 
     }
 
     public void pickOpen() {
 
-        leftSol.set(true);
-        rightSol.set(true);
+        sol.set(true);
 
     }
 
     public void pickClose() {
 
-        leftSol.set(false);
-        rightSol.set(false);
+        sol.set(false);
 
     }
 }
