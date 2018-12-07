@@ -15,7 +15,7 @@ import frc.drivetrain.TankData;
 import frc.mechs.MechCollection;
 
 public class LEDs {
-  private Tank tank;
+  private Tank gi;
   private MechCollection mechs;
   private PowerDistributionPanel pdp;
 
