@@ -8,7 +8,8 @@ import frc.config.Config;
 
 public class Pickup {
 
-    private Solenoid pickupPneumatic;
+    private Solenoid pickupLeft;
+    private Solenoid pickupRight;
 
     private TalonSRX pickupPivot;
     public static final int downPosition = Config.getInt("pick_up_position_down");
@@ -20,20 +21,22 @@ public class Pickup {
     public boolean modePosition;
 
     public Pickup() {
-        pickupPneumatic = new Solenoid(Config.getInt("pickup_pneumatic"));
+        pickupLeft = new Solenoid(Config.getInt("pickup_left"));
+        pickupRight = new Solenoid(Config.getInt("pickup_right"));
 
         pickupPivot = new TalonSRX(Config.getInt("pickup_pivot"));
 
-        pickupPivot.config_kP(0, 1, 0);
-        pickupPivot.config_kI(0, 0, 0);
-        pickupPivot.config_kD(0, 0, 0);
+        // pickupPivot.config_kP(0, 1, 0);
+        // pickupPivot.config_kI(0, 0, 0);
+        // pickupPivot.config_kD(0, 0, 0);
 
-        pickupPivot.config_kF(0, 0, 0);
+        // pickupPivot.config_kF(0, 0, 0);
     }
 
     // Would setGrab be a better name?
     public void setPickup(boolean state) {
-        pickupPneumatic.set(state);
+        pickupLeft.set(state);
+        pickupRight.set(state);
     }
 
     public void setPickupPivotPosition(int position) {
