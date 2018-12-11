@@ -35,7 +35,7 @@ public class Teleop {
 		double radians = joyDrive.getDirectionRadians();
 		double magnitude = joyDrive.getMagnitude();
 		
-		drive.setPolar((-2.0) * JoystickProfile.applyDeadband(joyDrive.getY(Hand.kLeft)), ((-2.0) * JoystickProfile.applyDeadband(radians)));
+		drive.setPolar((-2.0) * JoystickProfile.applyDeadband(joyDrive.getY()), ((-2.0) * JoystickProfile.applyDeadband(joyDrive.getX())));
 
 		if (xboxMechs.getAButton()) {
 			mechs.intake.pickOpen();
@@ -45,12 +45,7 @@ public class Teleop {
 
 		}
 
-		if (xboxMechs.getBumperPressed(Hand.kLeft)) {
-			mechs.arm.setArmPosition(Config.getInt("oppLow"));
-		}
-		if (xboxMechs.getBumperPressed(Hand.kRight)) {
-			mechs.arm.setArmPosition(Config.getInt("lowestPos"));
-		}
+		mechs.arm.setArmPower(xboxMechs.getY());
 
 	}
 }

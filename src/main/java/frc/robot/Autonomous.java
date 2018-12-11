@@ -37,10 +37,7 @@ public class Autonomous implements Runnable {
 	}
 
 	public void runAutonomous() throws InterruptedException {
-		arm.setArmPosition(Config.getInt("lowestPos"));
-		Thread.sleep(1000);
-		intake.pickOpen();
-		Thread.sleep(1000);
+
 		tank.setPolar(2.7 / 4, 0);
 
 		while (tracker.getX() < 1) {
@@ -48,29 +45,6 @@ public class Autonomous implements Runnable {
 		}
 
 		tank.setPolar(0, 0);
-		Thread.sleep(1000);
-		intake.pickClose();
-		Thread.sleep(1000);
-
-		// planning on driving backwards //
-		while (tank.getTankData().gyroAngle < Math.PI / 2) {
-			tank.setPolar(0, -(-Math.PI - 2 * tank.getTankData().gyroAngle - 0.2));
-			Thread.sleep(10);
-		}
-
-		// tank.setPolar(-4.5 / 4, 0);
-
-		while (tracker.getY() > -2) { // -4.5
-			Thread.sleep(50);
-		}
-
-		tank.set(0, 0);
-		arm.setArmPosition(Config.getInt("twotwentyfive"));
-		Thread.sleep(1000);
-		intake.pickOpen();
-		Thread.sleep(1000);
-		arm.setArmPosition(Config.getInt("lowestPos"));
-		Thread.sleep(1000);
 
 	}
 
