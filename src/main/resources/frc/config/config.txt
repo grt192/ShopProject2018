@@ -1,12 +1,10 @@
 # Config file for shop project robots
 
-sol =
+sol=0
 
-armmotor_master = 3
-armmotor_follower = 4
+armmotor_master=3
+armmotor_follower=4
 
-encLeft = 
-encRight =
 dt_width=0.73025
 ticks_to_meters=0.0005588
 
