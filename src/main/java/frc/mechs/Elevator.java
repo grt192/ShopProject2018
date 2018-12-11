@@ -15,6 +15,7 @@ public class Elevator {
     public static final int MIDDLE = 5000;
     public static final int BOTTOM = 0;
 
+    public boolean modePosition = false;
     public static final int UP = 1;
     public static final int DOWN = 0;
 
@@ -33,6 +34,12 @@ public class Elevator {
     }
 
     public void setElevatorPosition(int position) {
+        modePosition = true;
+
+        if (position == TOP) {
+            winchLeft.set(ControlMode.PercentOutput, 100);
+        }
+        modePosition = true;
         winchLeft.set(ControlMode.Position, position);
     }
 
@@ -43,6 +50,7 @@ public class Elevator {
 
     public void setElevatorPower(double power) {
         // Remeber to mess with direction
+        modePosition = false;
         winchLeft.set(ControlMode.PercentOutput, power);
     }
 }

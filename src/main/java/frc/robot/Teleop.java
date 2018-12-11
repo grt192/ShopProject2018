@@ -15,6 +15,9 @@ public class Teleop {
 	private MechCollection mechs;
 	private Tank drive;
 
+	private Double mechsLeftJoystick;
+	private Double mechsRightJoystick;
+
 	public Teleop(MechCollection mechs, Tank drive) {
 		this.mechs = mechs;
 		this.drive = drive;
@@ -45,15 +48,21 @@ public class Teleop {
 			mechs.elevator.setElevatorPosition(Elevator.BOTTOM);
 		}
 
-		mechs.pickup.setPickupPivotPower((-0.5) * JoystickProfile.applyDeadband(xboxDrive.getY(Hand.kLeft)));
-
-		mechs.elevator.setElevatorPower((-0.5) * JoystickProfile.applyDeadband(xboxMechs.getY(Hand.kRight)));
-
 		if (xboxMechs.getXButton()) {
 			mechs.pickup.setPickupPivotPosition(Pickup.armDown);
 		} else if (xboxMechs.getYButton()) {
 			mechs.pickup.setPickupPivotPosition(Pickup.armUp);
 		}
 
+		mechsLeftJoystick = JoystickProfile.applyDeadband(xboxDrive.getY(Hand.kLeft));
+		mechsRightJoystick = JoystickProfile.applyDeadband(xboxMechs.getY(Hand.kRight));
+
+		if (mechsLeftJoystick != 0 || !mechs.pickup.modePosition) {
+			mechs.pickup.setPickupPivotPower((-0.5) * mechsLeftJoystick);
+		}
+
+		if (mechsRightJoystick != 0 || !mechs.elevator.modePosition) {
+			mechs.elevator.setElevatorPower((-0.5) * mechsRightJoystick);
+		}
 	}
 }
