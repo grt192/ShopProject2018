@@ -40,11 +40,11 @@ public class Autonomous implements Runnable {
 			Thread.sleep(50);
 		}
 		tank.set(0, 0);
-		pickup.setPickupPivotPosition(Pickup.downPosition);
+		// pickup.setPickupPivotPosition(Pickup.DOWN_POSITION);
 		Thread.sleep(2000);
 		pickup.setPickup(true);
 		Thread.sleep(2000);
-		pickup.setPickupPivotPosition(Pickup.upPosition);
+		// pickup.setPickupPivotPosition(Pickup.UP_POSITION);
 		Thread.sleep(2000);
 		while (tank.getTankData().gyroAngle > -Math.PI / 2) {
 			tank.setPolar(0, -Math.PI - 2 * tank.getTankData().gyroAngle - 0.2);
@@ -55,13 +55,13 @@ public class Autonomous implements Runnable {
 			Thread.sleep(50);
 		}
 		tank.set(0, 0);
-		elevator.setElevatorPosition(Elevator.TOP);
+		// elevator.setElevatorPosition(Elevator.TOP);
 		Thread.sleep(2000);
 		pickup.setPickup(false);
 		Thread.sleep(2000);
-		pickup.setPickupPivotPosition(Pickup.downPosition);
+		// pickup.setPickupPivotPosition(Pickup.DOWN_POSITION);
 		Thread.sleep(2000);
-		elevator.setElevatorPosition(Elevator.BOTTOM);
+		// elevator.setElevatorPosition(Elevator.BOTTOM);
 		Thread.sleep(2000);
 		// tank.setPolarGradient(Math.PI, Math.PI / 2);
 	}

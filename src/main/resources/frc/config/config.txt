@@ -3,11 +3,10 @@ pickup_pneumatic=0
 
 pickup_pivot=16
 
-winch_left=15
-winch_right=0
+winch=15
 
-table_pivot=0
-
+pick_up_position_up=10000
+pick_up_position_down=5000
 
 dt_width=0.73025
 ticks_to_meters=0.0005588
@@ -20,11 +19,3 @@ left_follower=1
 right_inverted=true
 right_master=2
 right_follower=14
-
-pick_up_position_down=0
-pick_up_position_down=0
-top_floor_elevator=0
-tray_down=0
-tray_up=0
-ground_floor_elevator=0
-middle_floor_elevator=0
