@@ -24,13 +24,12 @@ public class Teleop {
 	private Double mechsRightJoystick;
 
 	public Teleop(MechCollection mechs, Tank drive) {
-		this.mechs = mechs;
 		this.drive = drive;
+		this.mechs = mechs;
 
-		xboxMechs = new XboxController(0);
-		xboxDrive = new XboxController(1);
+		xboxDrive = new XboxController(0);
+		xboxMechs = new XboxController(1);
 
-		arduino = new LEDs();
 	}
 
 	public void init() {
@@ -55,29 +54,32 @@ public class Teleop {
 			mechs.pickup.setPickup(false);
 		}
 
-		if (xboxMechs.getPOV() == 0) {
-			mechs.elevator.setElevatorPosition(Elevator.TOP);
-		} else if (xboxMechs.getPOV() == 2) {
-			mechs.elevator.setElevatorPosition(Elevator.MIDDLE);
-		} else if (xboxMechs.getPOV() == 4) {
-			mechs.elevator.setElevatorPosition(Elevator.BOTTOM);
-		}
+		// if (xboxMechs.getPOV() == 0) {
+		// mechs.elevator.setElevatorPosition(Elevator.TOP);
+		// } else if (xboxMechs.getPOV() == 2) {
+		// mechs.elevator.setElevatorPosition(Elevator.MIDDLE);
+		// } else if (xboxMechs.getPOV() == 4) {
+		// mechs.elevator.setElevatorPosition(Elevator.BOTTOM);
+		// }
 
-		if (xboxMechs.getXButton()) {
-			mechs.pickup.setPickupPivotPosition(Pickup.armDown);
-		} else if (xboxMechs.getYButton()) {
-			mechs.pickup.setPickupPivotPosition(Pickup.armUp);
-		}
+		// if (xboxMechs.getXButton()) {
+		// mechs.pickup.setPickupPivotPosition(Pickup.armDown);
+		// } else if (xboxMechs.getYButton()) {
+		// mechs.pickup.setPickupPivotPosition(Pickup.armUp);
+		// }
 
 		mechsLeftJoystick = JoystickProfile.applyDeadband(xboxDrive.getY(Hand.kLeft));
 		mechsRightJoystick = JoystickProfile.applyDeadband(xboxMechs.getY(Hand.kRight));
 
-		if (mechsLeftJoystick != 0 || !mechs.pickup.modePosition) {
-			mechs.pickup.setPickupPivotPower((-0.5) * mechsLeftJoystick);
-		}
+		mechs.pickup.setPickupPivotPower(mechsLeftJoystick);
+		mechs.elevator.setElevatorPower(mechsRightJoystick);
 
-		if (mechsRightJoystick != 0 || !mechs.elevator.modePosition) {
-			mechs.elevator.setElevatorPower((-0.5) * mechsRightJoystick);
-		}
+		// if (mechsLeftJoystick != 0 || !mechs.pickup.modePosition) {
+		// mechs.pickup.setPickupPivotPower((-0.5) * mechsLeftJoystick);
+		// }
+
+		// if (mechsRightJoystick != 0 || !mechs.elevator.modePosition) {
+		// mechs.elevator.setElevatorPower((-0.5) * mechsRightJoystick);
+		// }
 	}
 }

@@ -35,36 +35,25 @@ public class Autonomous implements Runnable {
 	}
 
 	public void runAutonomous() throws InterruptedException {
-		tank.setPolar(2.7 / 4, 0);
-		while (tracker.getX() < 1) { // 2.7
+		tank.setPolar(3 / 4, 0);
+		while (tracker.getX() < 3) { // 3.2
 			Thread.sleep(50);
 		}
 		tank.set(0, 0);
-		pickup.setPickupPivotPosition(Pickup.downPosition);
-		Thread.sleep(2000);
-		pickup.setPickup(true);
-		Thread.sleep(2000);
-		pickup.setPickupPivotPosition(Pickup.upPosition);
-		Thread.sleep(2000);
-		while (tank.getTankData().gyroAngle > -Math.PI / 2) {
-			tank.setPolar(0, -Math.PI - 2 * tank.getTankData().gyroAngle - 0.2);
-			Thread.sleep(10);
-		}
-		tank.setPolar(4.5 / 4, 0);
-		while (tracker.getY() > -2) { // -4.5
-			Thread.sleep(50);
-		}
-		tank.set(0, 0);
-		elevator.setElevatorPosition(Elevator.TOP);
-		Thread.sleep(2000);
-		pickup.setPickup(false);
-		Thread.sleep(2000);
-		pickup.setPickupPivotPosition(Pickup.downPosition);
-		Thread.sleep(2000);
-		elevator.setElevatorPosition(Elevator.BOTTOM);
-		Thread.sleep(2000);
-		// tank.setPolarGradient(Math.PI, Math.PI / 2);
 	}
+	/*
+	 * pickup.setPickupPivotPosition(Pickup.downPosition); Thread.sleep(2000);
+	 * pickup.setPickup(true); Thread.sleep(2000);
+	 * pickup.setPickupPivotPosition(Pickup.upPosition); Thread.sleep(2000); while
+	 * (tank.getTankData().gyroAngle > -Math.PI / 2) { tank.setPolar(0, -Math.PI - 2
+	 * * tank.getTankData().gyroAngle - 0.2); Thread.sleep(10); } tank.setPolar(4.5
+	 * / 4, 0); while (tracker.getY() > -2) { // -4.5 Thread.sleep(50); }
+	 * tank.set(0, 0); elevator.setElevatorPosition(Elevator.TOP);
+	 * Thread.sleep(2000); pickup.setPickup(false); Thread.sleep(2000);
+	 * pickup.setPickupPivotPosition(Pickup.downPosition); Thread.sleep(2000);
+	 * elevator.setElevatorPosition(Elevator.BOTTOM); Thread.sleep(2000); //
+	 * tank.setPolarGradient(Math.PI, Math.PI / 2); }
+	 */
 
 	public void disable() {
 		if (thread != null)
