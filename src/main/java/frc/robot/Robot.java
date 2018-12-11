@@ -54,7 +54,7 @@ public class Robot extends IterativeRobot {
 
     @Override
     public void robotPeriodic() {
-
+        arduino.sendVoltage(pdp.getVoltage());
     }
 
     @Override
