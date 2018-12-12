@@ -15,6 +15,15 @@ deploy {
             // You can use getTeamOrDefault(team) instead of getTeamNumber if you
             // want to store a team number in this file.
             team = getTeamNumber()
+
+            locations {
+                ssh {
+                    address = "10.1.92.90"
+                    user = "admin"
+                    password = ""
+                    ipv6 = false
+                }
+            }
         }
     }
     artifacts {

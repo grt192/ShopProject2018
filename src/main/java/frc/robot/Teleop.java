@@ -13,15 +13,20 @@ public class Teleop {
 
 	private XboxController xboxMechs;
 	private Joystick joyDrive;
+	//private XboxController xboxDrive;
 
 	private MechCollection mechs;
 	private Tank drive;
+
+	//private Double leftPower;
+	//private Double rightPower;
 
 	public Teleop(MechCollection mechs, Tank drive) {
 		this.mechs = mechs;
 		this.drive = drive;
 
 		xboxMechs = new XboxController(0);
+		//xboxDrive = new XboxController(1);
 		joyDrive = new Joystick(1);
 	}
 
@@ -31,8 +36,10 @@ public class Teleop {
 
 	public void periodic() {
 
-		double radians = joyDrive.getDirectionRadians();
-		double magnitude = joyDrive.getMagnitude();
+		//leftPower = (-1.0) * JoystickProfile.applyDeadband(xboxDrive.getY(Hand.kLeft));
+		//rightPower = (-1.0) * JoystickProfile.applyDeadband(xboxDrive.getY(Hand.kRight));
+
+		//drive.set(leftPower, rightPower);
 
 		drive.setPolar((-0.9) * JoystickProfile.applyDeadband(joyDrive.getY()),
 				((2.46) * JoystickProfile.applyDeadband(joyDrive.getX())));
