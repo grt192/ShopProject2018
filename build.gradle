@@ -18,7 +18,7 @@ deploy {
 
             locations {
                 ssh {
-                    address = "roborio-5553-frc.lan"
+                    address = "10.1.92.63"
                     user = "admin"
                     password = ""
                     ipv6 = false
