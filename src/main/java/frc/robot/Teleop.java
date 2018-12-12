@@ -4,9 +4,7 @@ import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.drivetrain.Tank;
 import frc.leds.LEDs;
-import frc.mechs.Elevator;
 import frc.mechs.MechCollection;
-import frc.mechs.Pickup;
 
 public class Teleop {
 

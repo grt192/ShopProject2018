@@ -16,8 +16,8 @@ import frc.mechs.MechCollection;
 import java.lang.Runnable;
 
 public class LEDs implements Runnable {
-  private Tank tankInfo;
-  private MechCollection mechs;
+  // private Tank tankInfo;
+  // private MechCollection mechs;
   private PowerDistributionPanel pdp;
 
   private SerialPort arduino;
@@ -25,7 +25,11 @@ public class LEDs implements Runnable {
   public LEDs() {
     try {
       pdp = new PowerDistributionPanel();
+      System.out.print("PDP Name");
+      System.out.println(pdp.getName());
+
       arduino = new SerialPort(9600, Port.kUSB);
+      System.out.println("Arduino comms started");
     } catch (Exception e) {
       // TODO: handle exception
     }

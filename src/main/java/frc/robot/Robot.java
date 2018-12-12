@@ -25,7 +25,7 @@ public class Robot extends IterativeRobot {
     private Tank tank;
     private MechCollection mechCollection;
 
-    private PowerDistributionPanel pdp;
+    // private PowerDistributionPanel pdp;
 
     private FieldMappingThread fieldMappingThread;
     private EncoderPositionTracker tracker;
