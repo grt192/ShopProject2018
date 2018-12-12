@@ -45,7 +45,11 @@ public class Teleop {
 
 		}
 
-		mechs.arm.setArmPower(JoystickProfile.applyDeadband(xboxMechs.getY() / -2));
+		if (xboxMechs.getY(Hand.kLeft) > 0) {
+			mechs.arm.setArmPower(JoystickProfile.applyDeadband(xboxMechs.getY(Hand.kLeft) / -6));
+		} else {
+			mechs.arm.setArmPower(JoystickProfile.applyDeadband(xboxMechs.getY(Hand.kLeft) / -3));
+		}
 
 	}
 }
