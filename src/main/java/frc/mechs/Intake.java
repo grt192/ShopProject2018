@@ -15,13 +15,13 @@ public class Intake {
 
     public void pickOpen() {
 
-        sol.set(true);
+        sol.set(false);
 
     }
 
     public void pickClose() {
 
-        sol.set(false);
+        sol.set(true);
 
     }
 }

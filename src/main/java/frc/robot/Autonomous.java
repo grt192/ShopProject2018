@@ -38,9 +38,9 @@ public class Autonomous implements Runnable {
 
 	public void runAutonomous() throws InterruptedException {
 
-		tank.setPolar(2.7 / 4, 0);
+		tank.setPolar(0.9, 0);
 
-		while (tracker.getX() < 1) {
+		while (tracker.getX() < 2) {
 			Thread.sleep(50);
 		}
 

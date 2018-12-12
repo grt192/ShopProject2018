@@ -17,7 +17,6 @@ public class Teleop {
 	private MechCollection mechs;
 	private Tank drive;
 
-
 	public Teleop(MechCollection mechs, Tank drive) {
 		this.mechs = mechs;
 		this.drive = drive;
@@ -34,8 +33,9 @@ public class Teleop {
 
 		double radians = joyDrive.getDirectionRadians();
 		double magnitude = joyDrive.getMagnitude();
-		
-		drive.setPolar((-2.0) * JoystickProfile.applyDeadband(joyDrive.getY()), ((-2.0) * JoystickProfile.applyDeadband(joyDrive.getX())));
+
+		drive.setPolar((-0.9) * JoystickProfile.applyDeadband(joyDrive.getY()),
+				((2.46) * JoystickProfile.applyDeadband(joyDrive.getX())));
 
 		if (xboxMechs.getAButton()) {
 			mechs.intake.pickOpen();
