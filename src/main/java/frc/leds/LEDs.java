@@ -41,10 +41,14 @@ public class LEDs implements Runnable {
   }
 
   public void sendVoltage(Double voltage) {
-    System.out.println("Voltage: " + voltage);
+    try {
+      System.out.println("Voltage: " + voltage);
 
-    if (arduino != null)
-      arduino.writeString("v" + voltage + "\n");
+      // if (arduino != null)
+      arduino.writeString(voltage + "\n");
+    } catch (Exception e) {
+
+    }
 
   }
 
