@@ -15,23 +15,6 @@ Adafruit_NeoPixel strip = Adafruit_NeoPixel(13, PIN, NEO_GRB + NEO_KHZ400);
 
 double voltage;
 
-String message;
-char key;
-String value;
-
-int voltageRangeMin = 0;
-int voltageRangeMax = 5;
-
-int leftSize = 11;
-int leftMin = voltageRangeMax;
-int leftRangeMax = voltageRangeMax + leftSize;
-int leftMiddle = leftMin + leftSize/2;
-
-int rightSize = 11;
-int rightMin = leftRangeMax;
-int rightRangeMax = leftRangeMax + rightSize;
-int rightMiddle = rightMin + rightSize/2;
-
 void setup()
 {
     Serial.begin(9600);
@@ -52,74 +35,24 @@ void loop()
     {
         unsigned long startTime = micros();
         
-        message = Serial.readStringUntil('\n');
+        double voltage = Serial.readStringUntil('\n').toDouble();
+                
+        double red = voltageToColor(0, voltage);
+        double green = voltageToColor(1, voltage);
 
-        key = message.charAt(0);
+        //Serial.println(red);
+        //Serial.println(green);
 
-        value = message.substring(1);
+        digitalWrite(13, LOW);
 
-        switch(key){
-          case 'v':
-            voltageSetStrip(value.toDouble());
-          default:
-            break;
+        for (int i = 0; i < STRIPLEN; i++)
+        {
+            strip.setPixelColor(i, red, green, 0);          
         }
-        
+
+        strip.show();
         Serial.println((micros() - startTime));
     }
-}
-
-void rightSetStrip(double power){
-  for(int i = rightMin; i < rightRangeMax; i++){
-    strip.setPixelColor(i, 0, 0, 0);
-  }
-  
-  if(power > 0){
-    for(int i = rightMiddle; i < rightRangeMax; i++){
-      strip.setPixelColor(i, 255, 0, 0);
-    }
-  }else if(power < 0){
-    for(int i = rightMin; i <= rightMiddle; i++){
-      strip.setPixelColor(i, 255, 0, 0);
-    }
-  }
-
-  strip.show();  
-}
-
-void leftSetStrip(double power){
-  for(int i = leftMin; i < leftRangeMax; i++){
-    strip.setPixelColor(i, 0, 0, 0);
-  }
-  
-  if(power > 0){
-    for(int i = leftMiddle; i < leftRangeMax; i++){
-      strip.setPixelColor(i, 255, 0, 0);
-    }
-  }else if(power < 0){
-    for(int i = leftMin; i <=leftMiddle; i++){
-      strip.setPixelColor(i, 255, 0, 0);
-    }
-  }
-
-  strip.show();  
-}
-
-void voltageSetStrip(double value){
-  double red = voltageToColor(0, voltage);
-  double green = voltageToColor(1, voltage);
-
-  //Serial.println(red);
-  //Serial.println(green);
-
-  digitalWrite(13, LOW);
-
-  for (int i = voltageRangeMin; i < voltageRangeMax; i++)
-  {
-      strip.setPixelColor(i, red, green, 0);          
-  }
-
-  strip.show();
 }
 
 double voltageToColor(int color, double voltage)

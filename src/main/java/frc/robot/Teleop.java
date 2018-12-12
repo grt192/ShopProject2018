@@ -37,8 +37,8 @@ public class Teleop {
 	}
 
 	public void periodic() {
-		leftPower = (-2.0) * JoystickProfile.applyDeadband(xboxDrive.getY(Hand.kLeft));
-		rightPower = (-2.0) * JoystickProfile.applyDeadband(xboxDrive.getY(Hand.kRight));
+		leftPower = (-1.0) * JoystickProfile.applyDeadband(xboxDrive.getY(Hand.kLeft));
+		rightPower = (-1.0) * JoystickProfile.applyDeadband(xboxDrive.getY(Hand.kRight));
 
 		drive.set(leftPower, rightPower);
 
@@ -68,10 +68,10 @@ public class Teleop {
 		// mechs.pickup.setPickupPivotPosition(Pickup.armUp);
 		// }
 
-		mechsLeftJoystick = JoystickProfile.applyDeadband(xboxDrive.getY(Hand.kLeft));
+		mechsLeftJoystick = JoystickProfile.applyDeadband(xboxMechs.getY(Hand.kLeft));
 		mechsRightJoystick = JoystickProfile.applyDeadband(xboxMechs.getY(Hand.kRight));
 
-		mechs.pickup.setPickupPivotPower(mechsLeftJoystick);
+		mechs.pickup.setPickupPivotPower(-0.5 * mechsLeftJoystick);
 		mechs.elevator.setElevatorPower(mechsRightJoystick);
 
 		// if (mechsLeftJoystick != 0 || !mechs.pickup.modePosition) {
