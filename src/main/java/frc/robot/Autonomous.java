@@ -27,19 +27,19 @@ public class Autonomous implements Runnable {
 	}
 
 	public void run() {
-		try {
-			runAutonomous();
-		} catch (InterruptedException e) {
-			System.out.println("Interrupting autonomous");
-		}
+		// try {
+		// runAutonomous();
+		// } catch (InterruptedException e) {
+		// System.out.println("Interrupting autonomous");
+		// }
 	}
 
 	public void runAutonomous() throws InterruptedException {
-		tank.setPolar(3 / 4, 0);
-		while (tracker.getX() < 3) { // 3.2
-			Thread.sleep(50);
-		}
-		tank.set(0, 0);
+		// tank.setPolar(3 / 4, 0);
+		// while (tracker.getX() < 3) { // 3.2
+		// Thread.sleep(50);
+		// }
+		// tank.set(0, 0);
 	}
 	/*
 	 * pickup.setPickupPivotPosition(Pickup.downPosition); Thread.sleep(2000);
