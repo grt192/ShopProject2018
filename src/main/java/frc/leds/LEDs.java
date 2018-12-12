@@ -13,8 +13,9 @@ import edu.wpi.first.wpilibj.SerialPort.Port;
 import frc.drivetrain.Tank;
 import frc.drivetrain.TankData;
 import frc.mechs.MechCollection;
+import java.lang.Runnable;
 
-public class LEDs {
+public class LEDs implements Runnable {
   private Tank tankInfo;
   private MechCollection mechs;
   private PowerDistributionPanel pdp;
@@ -23,11 +24,16 @@ public class LEDs {
 
   public LEDs() {
     try {
+      pdp = new PowerDistributionPanel();
       arduino = new SerialPort(9600, Port.kUSB);
     } catch (Exception e) {
       // TODO: handle exception
     }
 
+  }
+
+  public void run() {
+    sendVoltage(pdp.getVoltage());
   }
 
   public void sayHi() {

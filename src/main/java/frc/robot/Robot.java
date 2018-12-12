@@ -32,9 +32,15 @@ public class Robot extends IterativeRobot {
 
     private LEDs arduino;
 
+    private Notifier ledLoop;
+
     @Override
     public void robotInit() {
         Config.start();
+
+        arduino = new LEDs();
+
+        ledLoop = new Notifier(arduino);
 
         mechCollection = new MechCollection();
         tank = new Tank();
@@ -47,14 +53,12 @@ public class Robot extends IterativeRobot {
         auto = new Autonomous(mechCollection, tank, tracker);
         teleop = new Teleop(mechCollection, tank);
 
-        pdp = new PowerDistributionPanel();
-
-        arduino = new LEDs();
+        ledLoop.startPeriodic(0.1);
     }
 
     @Override
     public void robotPeriodic() {
-        arduino.sendVoltage(pdp.getVoltage());
+
     }
 
     @Override

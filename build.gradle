@@ -15,6 +15,15 @@ deploy {
             // You can use getTeamOrDefault(team) instead of getTeamNumber if you
             // want to store a team number in this file.
             team = getTeamNumber()
+
+            locations {
+                ssh {
+                    address = "roborio-5553-frc.lan"
+                    user = "admin"
+                    password = ""
+                    ipv6 = false
+                }
+            }
         }
     }
     artifacts {
