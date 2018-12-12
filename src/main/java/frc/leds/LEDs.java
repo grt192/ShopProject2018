@@ -38,7 +38,7 @@ public class LEDs {
     System.out.println("Voltage: " + voltage);
 
     if (arduino != null)
-      arduino.writeString("v" + voltage + "\n");
+      arduino.writeString(voltage + "\n");
 
   }
 
