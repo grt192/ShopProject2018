@@ -35,10 +35,14 @@ public class LEDs {
   }
 
   public void sendVoltage(Double voltage) {
-    System.out.println("Voltage: " + voltage);
+    try {
+      System.out.println("Voltage: " + voltage);
 
-    if (arduino != null)
+      // if (arduino != null)
       arduino.writeString(voltage + "\n");
+    } catch (Exception e) {
+
+    }
 
   }
 
